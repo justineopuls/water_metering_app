@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:water_metering_app/widgets/drawer.dart';
+import 'package:water_metering_app/widgets/customer_drawer.dart';
 
 class CustomerBilling extends StatelessWidget {
   const CustomerBilling({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class CustomerBilling extends StatelessWidget {
         backgroundColor: Colors.teal,
         title: Text('Billing'),
       ),
-      drawer: AppDrawer(),
+      drawer: CustomerDrawer(),
       body: Center(
         child: const Text('Customer Billing Screen'),
       ),

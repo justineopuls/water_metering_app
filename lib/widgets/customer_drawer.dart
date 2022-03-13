@@ -6,8 +6,8 @@ import 'package:water_metering_app/routes/routes.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
 import 'package:water_metering_app/services/auth_methods.dart';
 
-class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+class CustomerDrawer extends StatelessWidget {
+  const CustomerDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

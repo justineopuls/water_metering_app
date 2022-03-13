@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:water_metering_app/screens/customer_home/create_complaint.dart';
-import 'package:water_metering_app/widgets/drawer.dart';
+import 'package:water_metering_app/widgets/customer_drawer.dart';
 
 class ContactUs extends StatelessWidget {
   static const String routeName = '/contact_us';
@@ -12,7 +12,7 @@ class ContactUs extends StatelessWidget {
         backgroundColor: Colors.teal,
         title: const Text('Contact Us'),
       ),
-      drawer: const AppDrawer(),
+      drawer: const CustomerDrawer(),
       body: ListView(
         children: [
           ListTile(

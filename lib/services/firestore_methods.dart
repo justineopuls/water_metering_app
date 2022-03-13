@@ -20,6 +20,7 @@ class FirestoreMethods {
     String result = 'Some error occured.';
     try {
       if (file != null) {
+        print('File Selected');
         String photoUrl = await StorageMethods()
             .uploadImageToStorage('complaints', file, true);
 
