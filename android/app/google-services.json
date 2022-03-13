@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "856960125509",
+    "project_id": "water-metering-app",
+    "storage_bucket": "water-metering-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856960125509:android:77835e59080dcd1796b12c",
+        "android_client_info": {
+          "package_name": "com.example.water_metering_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856960125509-a2lmt8hjpbhtjoem5im3700cj44fhpcg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYWD6a_Xwh6FHWfNlWyCqjRp9xjIhPV24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856960125509-a2lmt8hjpbhtjoem5im3700cj44fhpcg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
