@@ -19,7 +19,7 @@ class CreateComplaint extends StatefulWidget {
 
 class _CreateComplaintState extends State<CreateComplaint> {
   Uint8List? _file;
-
+  bool _isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -67,6 +67,9 @@ class _CreateComplaintState extends State<CreateComplaint> {
     String photoLocation,
     String photoDateTime,
   ) async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String result = await FirestoreMethods().uploadComplaint(
         _descriptionController.text,
@@ -78,11 +81,19 @@ class _CreateComplaintState extends State<CreateComplaint> {
       );
 
       if (result == 'success') {
+        setState(() {
+          _isLoading = false;
+        });
         showSnackBar(
             'Complaint Sent! Please wait for a customer service representative to contact you.',
             context);
+        Navigator.pop(context);
       } else {
+        setState(() {
+          _isLoading = false;
+        });
         showSnackBar(result, context);
+        Navigator.pop(context);
       }
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -173,7 +184,11 @@ class _CreateComplaintState extends State<CreateComplaint> {
                     primary: Colors.teal, // background
                     onPrimary: Colors.white, // foreground
                   ),
-                  child: const Text('Submit Ticket'),
+                  child: _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : const Text('Submit Ticket'),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       postComplaint(
