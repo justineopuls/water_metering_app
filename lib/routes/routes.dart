@@ -10,6 +10,8 @@ import 'package:water_metering_app/screens/customer_home/customer_records.dart';
 class Routes {
   // Customer Routes
   static const String customerHome = CustomerHome.routeName;
+  static const String customerProfile = CustomerProfile.routeName;
+  static const String editProfile = EditProfile.routeName;
   static const String customerRecords = CustomerRecords.routeName;
   static const String customerBilling = CustomerBilling.routeName;
   static const String contactUs = ContactUs.routeName;
