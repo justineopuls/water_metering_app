@@ -5,7 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:water_metering_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:water_metering_app/providers/user_provider.dart';
-import 'package:water_metering_app/widgets/drawer.dart';
+import 'package:water_metering_app/widgets/customer_drawer.dart';
 import 'package:water_metering_app/models/user.dart';
 import 'package:water_metering_app/widgets/edit_profile_button.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
@@ -32,7 +32,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
           elevation: 0,
           title: const Text('Profile'),
         ),
-        drawer: AppDrawer(),
+        drawer: CustomerDrawer(),
         body: ListView(
           padding: const EdgeInsets.fromLTRB(30,25,10,10),
           children: [

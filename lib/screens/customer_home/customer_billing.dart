@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:water_metering_app/widgets/drawer.dart';
+import 'package:water_metering_app/widgets/customer_drawer.dart';
 
 class CustomerBilling extends StatefulWidget {
   const CustomerBilling({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _CustomerBillingState extends State<CustomerBilling> {
       backgroundColor: Colors.teal,
       title: Text('Billing'),
     ),
-    drawer: AppDrawer(),
+    drawer: CustomerDrawer(),
     body: ListView(
       children: [
         Container(

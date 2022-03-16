@@ -25,6 +25,12 @@ class CustomerDrawer extends StatelessWidget {
           ),
           const Divider(),
           _createDrawerItem(
+            icon: Icons.account_circle,
+            text: 'Profile',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, Routes.customerProfile),
+          ),
+          _createDrawerItem(
             icon: Icons.article,
             text: 'Records',
             onTap: () =>

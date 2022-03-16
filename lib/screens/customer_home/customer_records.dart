@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:water_metering_app/widgets/drawer.dart';
+import 'package:water_metering_app/widgets/customer_drawer.dart';
 import 'package:water_metering_app/services/storage_methods.dart';
 
 class FirebaseDownload {
@@ -23,7 +23,7 @@ class CustomerRecords extends StatelessWidget {
         backgroundColor: Colors.teal,
         title: Text('Records'),
       ),
-      drawer: const AppDrawer(),
+      drawer: const CustomerDrawer(),
       body: Center(
         child: TextButton(
           child: Text('Download'),

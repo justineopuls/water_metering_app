@@ -8,7 +8,7 @@ import 'package:water_metering_app/utils/colors.dart';
 import 'package:water_metering_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:water_metering_app/providers/user_provider.dart';
-import 'package:water_metering_app/widgets/drawer.dart';
+import 'package:water_metering_app/widgets/customer_drawer.dart';
 import 'package:water_metering_app/models/user.dart';
 import 'package:water_metering_app/widgets/textfield.dart';
 import 'package:water_metering_app/services/storage_methods.dart';
@@ -16,9 +16,7 @@ import 'package:water_metering_app/widgets/edit_profile_button.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
 import 'package:water_metering_app/services/auth_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:water_metering_app/services/firestore_methods.dart';
-import 'package:water_metering_app/repository/user_data_repository.dart';
 import 'package:water_metering_app/widgets/update_user_data.dart';
 
 
@@ -40,7 +38,7 @@ class _EditProfileState extends State<EditProfile> {
           backgroundColor: primaryColor,
           title: Text('Edit Profile'),
         ),
-        drawer: AppDrawer(),
+        drawer: CustomerDrawer(),
         body: ListView(
           padding: const EdgeInsets.all(30),
           children: [
