@@ -1,53 +1,49 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Complaint {
-  final String description;
+class AdminImage {
+  final String meterNumber;
   final String uid;
-  final String displayName;
+  final String uploadedBy;
   final datePublished;
-  final String complaintId;
+  final String uploadId;
   final String photoUrl;
   final String photoLocation;
   final String photoDateTime;
-  final bool isResolved;
 
-  const Complaint({
-    required this.description,
+  const AdminImage({
+    required this.meterNumber,
     required this.uid,
-    required this.displayName,
+    required this.uploadedBy,
     required this.datePublished,
-    required this.complaintId,
+    required this.uploadId,
     this.photoUrl = '',
     this.photoLocation = '',
     this.photoDateTime = '',
-    this.isResolved = false,
   });
 
   Map<String, dynamic> toJson() => {
-        'description': description,
+        'meterNumber': meterNumber,
         'uid': uid,
-        'displayName': displayName,
+        'uploadedBy': uploadedBy,
         'datePublished': datePublished,
-        'complaintId': complaintId,
+        'complaintId': uploadId,
         'photoUrl': photoUrl,
         'photoLocation': photoLocation,
         'photoDateTime': photoDateTime,
-        'isResolved': isResolved,
       };
 
-  static Complaint fromSnapshot(DocumentSnapshot snap) {
+  static AdminImage fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
-    return Complaint(
-      description: snapshot['description'],
+    return AdminImage(
+      meterNumber: snapshot['meterNumber'],
       uid: snapshot['uid'],
-      displayName: snapshot['displayName'],
+      uploadedBy: snapshot['uploadedBy'],
       datePublished: snapshot['datePublished'],
-      complaintId: snapshot['complaintId'],
+      uploadId: snapshot['uploadId'],
       photoUrl: snapshot['photoUrl'],
       photoLocation: snapshot['photoLocation'],
       photoDateTime: snapshot['photoDateTime'],
-      isResolved: snapshot['isResolved'],
     );
   }
 }

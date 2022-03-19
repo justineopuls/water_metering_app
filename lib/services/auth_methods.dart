@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:water_metering_app/models/user.dart';
 
 class AuthMethods {
@@ -30,7 +29,6 @@ class AuthMethods {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       // Add user to database
-
       MyUser user = MyUser(
         displayName: displayName,
         uid: userCredential.user!.uid,
@@ -88,7 +86,6 @@ class AuthMethods {
     try {
       return await _auth.signOut();
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
