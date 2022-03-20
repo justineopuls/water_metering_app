@@ -11,7 +11,7 @@ class AdminDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MyUser user = Provider.of<UserProvider>(context).getUser;
+    final MyUser? user = Provider.of<UserProvider>(context).getUser;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -59,12 +59,12 @@ class AdminDrawer extends StatelessWidget {
     );
   }
 
-  Widget _createHeader({required MyUser user}) {
+  Widget _createHeader({required MyUser? user}) {
     return UserAccountsDrawerHeader(
       decoration: const BoxDecoration(
         color: Colors.teal,
       ),
-      accountName: Text(user.displayName),
+      accountName: Text(user!.displayName),
       accountEmail: Text(user.email),
       currentAccountPicture: const CircleAvatar(
         backgroundColor: Colors.grey,

@@ -18,8 +18,8 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   @override
   Widget build(BuildContext context) {
     MyUser? user = Provider.of<UserProvider>(context).getUser;
-    print(user.userType);
-    if (user.userType == 'admin') {
+    print(user?.userType);
+    if (user?.userType == 'admin') {
       return AdminHome();
     } else
       return CustomerHome();

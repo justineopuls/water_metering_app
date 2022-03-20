@@ -88,7 +88,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
 
   @override
   Widget build(BuildContext context) {
-    final MyUser user = Provider.of<UserProvider>(context).getUser;
+    final MyUser? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -171,7 +171,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       uploadAdminImage(
-                        user.uid,
+                        user!.uid,
                         user.displayName,
                         'Test Location',
                         'Test Date Time',

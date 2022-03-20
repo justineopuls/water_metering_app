@@ -108,7 +108,7 @@ class _CreateComplaintState extends State<CreateComplaint> {
 
   @override
   Widget build(BuildContext context) {
-    final MyUser user = Provider.of<UserProvider>(context).getUser;
+    final MyUser? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -192,7 +192,7 @@ class _CreateComplaintState extends State<CreateComplaint> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       postComplaint(
-                        user.uid,
+                        user!.uid,
                         user.displayName,
                         'Test Location',
                         'Test Date Time',

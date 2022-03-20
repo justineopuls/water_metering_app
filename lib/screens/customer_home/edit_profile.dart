@@ -19,7 +19,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:water_metering_app/services/firestore_methods.dart';
 import 'package:water_metering_app/widgets/update_user_data.dart';
 
-
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
 
@@ -31,8 +30,7 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
-
-    final MyUser user = Provider.of<UserProvider>(context).getUser;
+    final MyUser? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
@@ -45,13 +43,15 @@ class _EditProfileState extends State<EditProfile> {
             CircleAvatar(
               radius: 50,
               child: ClipOval(
-                  child: Icon(Icons.account_circle,size:100,)
-              ),
+                  child: Icon(
+                Icons.account_circle,
+                size: 100,
+              )),
             ),
             const SizedBox(height: 20),
             TextFieldWidget(
               label: 'Full Name',
-              text: user.displayName,
+              text: user!.displayName,
               onChanged: (name) {},
             ),
             const SizedBox(height: 20),
@@ -79,13 +79,11 @@ class _EditProfileState extends State<EditProfile> {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: TextButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 child: Text('SAVE'),
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 }

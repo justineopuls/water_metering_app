@@ -20,12 +20,9 @@ class CustomerProfile extends StatefulWidget {
 }
 
 class _CustomerProfileState extends State<CustomerProfile> {
-
   @override
-
-
   Widget build(BuildContext context) {
-    final MyUser user = Provider.of<UserProvider>(context).getUser;
+    final MyUser? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.teal,
@@ -34,25 +31,28 @@ class _CustomerProfileState extends State<CustomerProfile> {
         ),
         drawer: CustomerDrawer(),
         body: ListView(
-          padding: const EdgeInsets.fromLTRB(30,25,10,10),
+          padding: const EdgeInsets.fromLTRB(30, 25, 10, 10),
           children: [
             Padding(
-              padding: const EdgeInsets.only(top:10),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
                   CircleAvatar(
                     radius: 50,
                     child: ClipOval(
-                        child: Icon(Icons.account_circle,size:100,)
-                    ),
+                        child: Icon(
+                      Icons.account_circle,
+                      size: 100,
+                    )),
                   ),
-                  Spacer(flex:20),
+                  Spacer(flex: 20),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(user.displayName,
+                      Text(
+                        user!.displayName,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -63,15 +63,16 @@ class _CustomerProfileState extends State<CustomerProfile> {
                       ),
                     ],
                   ),
-                  Spacer(flex:40),
+                  Spacer(flex: 40),
                 ],
               ),
             ),
-            SizedBox(height:50),
+            SizedBox(height: 50),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Email',
+                Text(
+                  'Email',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -86,8 +87,9 @@ class _CustomerProfileState extends State<CustomerProfile> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: Container(
-                      padding: EdgeInsets.only(left:10),
-                      child: Text(user.email,
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        user.email,
                         style: TextStyle(
                           fontSize: 15,
                           fontStyle: FontStyle.italic,
@@ -99,7 +101,8 @@ class _CustomerProfileState extends State<CustomerProfile> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text('Phone Number',
+                Text(
+                  'Phone Number',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -114,8 +117,9 @@ class _CustomerProfileState extends State<CustomerProfile> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: Container(
-                      padding: EdgeInsets.only(left:10),
-                      child: Text('09231234567',
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        '09231234567',
                         style: TextStyle(
                           fontSize: 15,
                           fontStyle: FontStyle.italic,
@@ -127,7 +131,8 @@ class _CustomerProfileState extends State<CustomerProfile> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text('Address',
+                Text(
+                  'Address',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -142,8 +147,9 @@ class _CustomerProfileState extends State<CustomerProfile> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: Container(
-                      padding: EdgeInsets.only(left:10),
-                      child: Text('123 Village Yan Subd., Marikina, Philippines',
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        '123 Village Yan Subd., Marikina, Philippines',
                         style: TextStyle(
                           fontSize: 15,
                           fontStyle: FontStyle.italic,
@@ -157,7 +163,6 @@ class _CustomerProfileState extends State<CustomerProfile> {
               ],
             ),
           ],
-        )
-    );
+        ));
   }
 }
