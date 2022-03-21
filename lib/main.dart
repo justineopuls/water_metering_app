@@ -18,6 +18,10 @@ import 'package:water_metering_app/screens/customer_home/customer_billing.dart';
 import 'package:water_metering_app/screens/customer_home/customer_home.dart';
 import 'package:water_metering_app/screens/customer_home/customer_profile.dart';
 import 'package:water_metering_app/screens/customer_home/edit_profile.dart';
+import 'package:water_metering_app/widgets/change_username.dart';
+import 'package:water_metering_app/widgets/change_email.dart';
+import 'package:water_metering_app/widgets/change_number.dart';
+import 'package:water_metering_app/widgets/change_password.dart';
 import 'package:water_metering_app/screens/customer_home/customer_records.dart';
 import 'package:water_metering_app/utils/colors.dart';
 import 'package:water_metering_app/utils/loading.dart';
@@ -85,6 +89,10 @@ class MyApp extends StatelessWidget {
           Routes.customerHome: (context) => const CustomerHome(),
           Routes.customerProfile: (context) => const CustomerProfile(),
           Routes.editProfile: (context) => EditProfile(),
+          Routes.changeUsername: (context) => ChangeUsername(),
+          Routes.changeEmail: (context) => ChangeEmail(),
+          Routes.changeNumber: (context) => ChangeNumber(),
+          Routes.changePassword: (context) => ChangePassword(),
           Routes.customerRecords: (context) => const CustomerRecords(),
           Routes.customerBilling: (context) => const CustomerBilling(),
           Routes.contactUs: (context) => const ContactUs(),
