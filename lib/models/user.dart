@@ -7,6 +7,7 @@ class MyUser {
   final String meterNumber;
   final String userType;
 
+
   const MyUser(
       {required this.displayName,
       required this.uid,

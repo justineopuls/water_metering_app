@@ -63,7 +63,7 @@ class AuthMethods {
     required String email,
     required String password,
   }) async {
-    String result = 'Some error occured.';
+    String result = 'Some error occurred.';
     try {
       // Log In User
       await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -91,5 +91,56 @@ class AuthMethods {
       print(e.toString());
       return null;
     }
+  }
+
+  Future updateEmail(String newMail) async {
+    String result = 'Some error occurred.';
+    try {
+      await _auth.currentUser?.updateEmail(newMail).then((_) {
+        result = "Successfully changed email";
+      }).catchError((error) {
+        result = ("Email can't be changed" + error.toString());
+      });
+    }
+    on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+       result = 'Email format is invalid.';
+      } else if (e.code == 'email-already-in-use') {
+        result = 'Email is already in use.';
+      } else if (e.code == 'requires-recent-login') {
+        result = 'Login token expired, re-login to continue.';
+      }
+    }
+    catch (e) {
+      result = e.toString();
+    }
+    return result;
+  }
+
+  Future updatePassword(String newPasswordCopy, String newPassword) async {
+    String result = 'Some error occurred.';
+    try {
+      if (newPassword == newPasswordCopy) {
+        await _auth.currentUser?.updatePassword(newPassword).then((_) {
+          result = "Successfully changed password";
+        }).catchError((error) {
+          result = ("Password can't be changed" + error.toString());
+        });
+      }
+      else {
+        result = 'Passwords do not match';
+      }
+    }
+    on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        result = 'New password is too weak.';
+      } else if (e.code == 'requires-recent-login') {
+        result = 'Login token expired, re-login to continue.';
+      }
+    }
+    catch (e) {
+      result = e.toString();
+    }
+    return result;
   }
 }

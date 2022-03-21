@@ -6,10 +6,14 @@ import 'package:water_metering_app/routes/routes.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
 import 'package:water_metering_app/services/auth_methods.dart';
 
-class CustomerDrawer extends StatelessWidget {
+class CustomerDrawer extends StatefulWidget {
   const CustomerDrawer({Key? key}) : super(key: key);
 
   @override
+  _CustomerDrawerState createState() => _CustomerDrawerState();
+}
+
+class _CustomerDrawerState extends State<CustomerDrawer> {
   Widget build(BuildContext context) {
     final MyUser user = Provider.of<UserProvider>(context).getUser;
     return Drawer(

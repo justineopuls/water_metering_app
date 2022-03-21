@@ -11,7 +11,7 @@ class EditProfileButton extends StatelessWidget {
       padding: const EdgeInsets.only(top:8),
       child: TextButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(context, Routes.editProfile);
+          Navigator.pushReplacementNamed(context, Routes.updateProfile);
         },
         child: Container(
           decoration: BoxDecoration(

@@ -8,12 +8,14 @@ import 'package:water_metering_app/screens/customer_home/customer_home.dart';
 import 'package:water_metering_app/screens/customer_home/customer_records.dart';
 import 'package:water_metering_app/screens/customer_home/customer_profile.dart';
 import 'package:water_metering_app/screens/customer_home/edit_profile.dart';
+import 'package:water_metering_app/screens/customer_home/update_profile.dart';
 
 class Routes {
   // Customer Routes
   static const String customerHome = CustomerHome.routeName;
   static const String customerProfile = CustomerProfile.routeName;
   static const String editProfile = EditProfile.routeName;
+  static const String updateProfile = EditUserData.routeName;
   static const String customerRecords = CustomerRecords.routeName;
   static const String customerBilling = CustomerBilling.routeName;
   static const String contactUs = ContactUs.routeName;

@@ -19,6 +19,7 @@ import 'package:water_metering_app/screens/customer_home/customer_home.dart';
 import 'package:water_metering_app/screens/customer_home/customer_profile.dart';
 import 'package:water_metering_app/screens/customer_home/edit_profile.dart';
 import 'package:water_metering_app/screens/customer_home/customer_records.dart';
+import 'package:water_metering_app/screens/customer_home/update_profile.dart';
 import 'package:water_metering_app/utils/colors.dart';
 import 'package:water_metering_app/utils/loading.dart';
 
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
           Routes.customerHome: (context) => const CustomerHome(),
           Routes.customerProfile: (context) => const CustomerProfile(),
           Routes.editProfile: (context) => EditProfile(),
+          Routes.updateProfile: (context) => EditUserData(),
           Routes.customerRecords: (context) => const CustomerRecords(),
           Routes.customerBilling: (context) => const CustomerBilling(),
           Routes.contactUs: (context) => const ContactUs(),
