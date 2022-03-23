@@ -13,7 +13,7 @@ class CustomerHome extends StatelessWidget {
         backgroundColor: Colors.teal,
         title: Text('Home'),
       ),
-      drawer: CustomerDrawer(),
+      drawer: const CustomerDrawer(),
       body: Center(
         child: const Text('Customer Home Screen'),
       ),

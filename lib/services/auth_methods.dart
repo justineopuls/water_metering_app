@@ -89,4 +89,55 @@ class AuthMethods {
       return null;
     }
   }
+  // Update user email
+  Future updateEmail(String newMail) async {
+    String result = 'Some error occurred.';
+    try {
+      await _auth.currentUser?.updateEmail(newMail).then((_) {
+        result = "Successfully changed email";
+      }).catchError((error) {
+        result = ("Email can't be changed" + error.toString());
+      });
+    }
+    on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        result = 'Email format is invalid.';
+      } else if (e.code == 'email-already-in-use') {
+        result = 'Email is already in use.';
+      } else if (e.code == 'requires-recent-login') {
+        result = 'Login token expired, re-login to continue.';
+      }
+    }
+    catch (e) {
+      result = e.toString();
+    }
+    return result;
+  }
+  // Update user password
+  Future updatePassword(String newPasswordCopy, String newPassword) async {
+    String result = 'Some error occurred.';
+    try {
+      if (newPassword == newPasswordCopy) {
+        await _auth.currentUser?.updatePassword(newPassword).then((_) {
+          result = "Successfully changed password";
+        }).catchError((error) {
+          result = ("Password can't be changed" + error.toString());
+        });
+      }
+      else {
+        result = 'Passwords do not match';
+      }
+    }
+    on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        result = 'New password is too weak.';
+      } else if (e.code == 'requires-recent-login') {
+        result = 'Login token expired, re-login to continue.';
+      }
+    }
+    catch (e) {
+      result = e.toString();
+    }
+    return result;
+  }
 }
