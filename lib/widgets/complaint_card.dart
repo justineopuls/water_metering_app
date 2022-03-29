@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:water_metering_app/utils/colors.dart';
 
+import '../screens/admin_home/complaint_view_page.dart';
+
 class ComplaintCard extends StatelessWidget {
   final snapshot;
   const ComplaintCard({Key? key, required this.snapshot}) : super(key: key);
@@ -120,26 +122,36 @@ class ComplaintListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10,5,10,0),
-        child:
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(217, 225, 223, 0.8),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Color.fromRGBO(215, 230, 227, 1)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: SizedBox(
-                height: 200,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    AspectRatio(
-                      aspectRatio: 1.1,
-                      child: thumbnail,
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ComplaintViewPage(),
+            ));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: SizedBox(
+            height: 100,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                AspectRatio(
+                  aspectRatio: 1.0,
+                  child: thumbnail,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                    child: _ComplaintDescription(
+                      displayName: displayName,
+                      description: description,
+                      meterNumber: meterNumber,
+                      datePublished: datePublished,
                     ),
                     Expanded(
                       child: Padding(
