@@ -40,7 +40,6 @@ void main() async {
   } else {
     await Firebase.initializeApp();
   }
-
   runApp(const MyApp());
 }
 
@@ -105,5 +104,6 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+
   }
 }

@@ -25,11 +25,6 @@ class _ChangePasswordState extends State<ChangePassword> {
     final String? uid = user?.uid;
     String newPassword = 'placeholder', newPasswordRetype = 'placeholder';
 
-    Future<void> updateUserInfo(String param, String newValue) async {
-      return await userList.doc(uid).update({
-        param : newValue,
-      });
-    }
 
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
@@ -50,6 +45,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     child:
                     TextField(
                       controller: TextEditingController(),
+                      obscureText: true,
                       decoration:
                       textInputDecoration.copyWith(
                           hintText: 'Enter new password...'),
@@ -63,6 +59,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     child:
                     TextField(
                       controller: TextEditingController(),
+                      obscureText: true,
                       decoration:
                       textInputDecoration.copyWith(hintText: 'Re-enter new password...'),
                       onChanged: (String value) {

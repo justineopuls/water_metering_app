@@ -121,36 +121,42 @@ class ComplaintListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: SizedBox(
-            height: 100,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1.0,
-                  child: thumbnail,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
-                    child: _ComplaintDescription(
-                      displayName: displayName,
-                      description: description,
-                      meterNumber: meterNumber,
-                      datePublished: datePublished,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10,5,10,0),
+        child:
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(217, 225, 223, 0.8),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Color.fromRGBO(215, 230, 227, 1)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: SizedBox(
+                height: 200,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 1.1,
+                      child: thumbnail,
                     ),
-                  ),
-                )
-              ],
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                        child: _ComplaintDescription(
+                          displayName: displayName,
+                          description: description,
+                          meterNumber: meterNumber,
+                          datePublished: datePublished,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
       ),
     );
   }

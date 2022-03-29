@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:water_metering_app/models/user.dart';
 
 class AuthMethods {
@@ -114,7 +115,7 @@ class AuthMethods {
     return result;
   }
   // Update user password
-  Future updatePassword(String newPasswordCopy, String newPassword) async {
+  Future updatePassword(String newPassword,String newPasswordCopy) async {
     String result = 'Some error occurred.';
     try {
       if (newPassword == newPasswordCopy) {

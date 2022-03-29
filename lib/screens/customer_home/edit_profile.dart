@@ -52,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
                     subtitle: Text(snapshot.data.data()['displayName']),
                     trailing: Icon(Icons.chevron_right, size: 30),
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.changeUsername);
+                      Navigator.pushNamed(context, Routes.changeUsername);
                     },
                   ),
                   ListTile(
@@ -60,7 +60,7 @@ class _EditProfileState extends State<EditProfile> {
                     subtitle: Text(snapshot.data.data()['phoneNumber']),
                     trailing: Icon(Icons.chevron_right, size: 30),
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.changeNumber);
+                      Navigator.pushNamed(context, Routes.changeNumber);
                     },
                   ),
                   ListTile(
@@ -68,7 +68,7 @@ class _EditProfileState extends State<EditProfile> {
                     subtitle: Text(snapshot.data.data()['email']),
                     trailing: Icon(Icons.chevron_right, size: 30),
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.changeEmail);
+                      Navigator.pushNamed(context, Routes.changeEmail);
                     },
                   ),
                 ],

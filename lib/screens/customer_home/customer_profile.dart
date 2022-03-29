@@ -31,7 +31,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
         ),
         drawer: CustomerDrawer(),
         body: ListView(
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.all(10),
           children: [
             ListTile(
             title: Text("Account information"),
@@ -40,7 +40,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
             leading: Icon(Icons.person, size:40),
             trailing: Icon(Icons.chevron_right, size: 30),
             onTap: () {
-              Navigator.pushReplacementNamed(context, Routes.editProfile);
+              Navigator.pushNamed(context, Routes.editProfile);
             },
 
             ),
@@ -51,7 +51,7 @@ class _CustomerProfileState extends State<CustomerProfile> {
               leading: Icon(Icons.lock, size:40),
               trailing: Icon(Icons.chevron_right, size: 30),
               onTap: () {
-                Navigator.pushReplacementNamed(context, Routes.changePassword);
+                Navigator.pushNamed(context, Routes.changePassword);
               },
             ),
         ],
