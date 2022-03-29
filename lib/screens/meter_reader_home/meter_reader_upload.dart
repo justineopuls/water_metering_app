@@ -10,18 +10,18 @@ import 'package:water_metering_app/services/firestore_methods.dart';
 import 'package:water_metering_app/utils/colors.dart';
 import 'package:water_metering_app/utils/constants.dart';
 import 'package:water_metering_app/utils/utils.dart';
-import 'package:water_metering_app/widgets/admin_drawer.dart';
+import 'package:water_metering_app/widgets/meter_reader_drawer.dart';
 
-class PhotoUpload extends StatefulWidget {
-  const PhotoUpload({Key? key}) : super(key: key);
+class MeterReaderUpload extends StatefulWidget {
+  const MeterReaderUpload({Key? key}) : super(key: key);
 
-  static const String routeName = '/photo_upload';
+  static const String routeName = '/meter_reader_upload';
 
   @override
-  State<PhotoUpload> createState() => _PhotoUploadState();
+  State<MeterReaderUpload> createState() => _MeterReaderUploadState();
 }
 
-class _PhotoUploadState extends State<PhotoUpload> {
+class _MeterReaderUploadState extends State<MeterReaderUpload> {
   Uint8List? _file;
   bool _isLoading = false;
   final TextEditingController _meterNumberController = TextEditingController();
@@ -61,13 +61,13 @@ class _PhotoUploadState extends State<PhotoUpload> {
             _isLoading = false;
           });
           showSnackBar('Image upload successful.', context);
-          Navigator.pushReplacementNamed(context, Routes.photoUpload);
+          Navigator.pushReplacementNamed(context, Routes.meterReaderUpload);
         } else {
           setState(() {
             _isLoading = false;
           });
           showSnackBar(result, context);
-          Navigator.pushReplacementNamed(context, Routes.photoUpload);
+          Navigator.pushReplacementNamed(context, Routes.meterReaderUpload);
         }
       } catch (e) {
         showSnackBar(e.toString(), context);
@@ -94,7 +94,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
         backgroundColor: Colors.teal,
         title: const Text('Upload Image'),
       ),
-      drawer: AdminDrawer(),
+      drawer: MeterReaderDrawer(),
       body: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 20.0,

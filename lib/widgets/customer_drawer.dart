@@ -17,8 +17,8 @@ class CustomerDrawer extends StatelessWidget {
 
     Widget _createDrawerItem(
         {required IconData icon,
-          required String text,
-          required GestureTapCallback onTap}) {
+        required String text,
+        required GestureTapCallback onTap}) {
       return ListTile(
         title: Row(
           children: <Widget>[
@@ -34,78 +34,74 @@ class CustomerDrawer extends StatelessWidget {
     }
 
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
-    builder: (context, AsyncSnapshot<dynamic> snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const CircularProgressIndicator();
-      } else {
-        return Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-                UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(
-                  color: Colors.teal,
-                ),
-                accountName: Text(snapshot.data?.data()['displayName']),
-                accountEmail: Text(snapshot.data?.data()['email']),
-                currentAccountPicture: const CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person, color: Colors.white, size: 60),
-                ),
-              ),
-              _createDrawerItem(
-                icon: Icons.home,
-                text: 'Home',
-                onTap: () =>
-                    Navigator.pushReplacementNamed(
+        stream:
+            FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+        builder: (context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else {
+            return Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Colors.teal,
+                    ),
+                    accountName: Text(snapshot.data?.data()['displayName']),
+                    accountEmail: Text(snapshot.data?.data()['email']),
+                    currentAccountPicture: const CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      child: Icon(Icons.person, color: Colors.white, size: 60),
+                    ),
+                  ),
+                  _createDrawerItem(
+                    icon: Icons.home,
+                    text: 'Home',
+                    onTap: () => Navigator.pushReplacementNamed(
                         context, Routes.customerHome),
-              ),
-              const Divider(),
-              _createDrawerItem(
-                icon: Icons.account_circle,
-                text: 'Profile',
-                onTap: () =>
-                    Navigator.pushReplacementNamed(
+                  ),
+                  const Divider(),
+                  _createDrawerItem(
+                    icon: Icons.account_circle,
+                    text: 'Profile',
+                    onTap: () => Navigator.pushReplacementNamed(
                         context, Routes.customerProfile),
-              ),
-              _createDrawerItem(
-                icon: Icons.article,
-                text: 'Records',
-                onTap: () =>
-                    Navigator.pushReplacementNamed(
+                  ),
+                  _createDrawerItem(
+                    icon: Icons.article,
+                    text: 'Records',
+                    onTap: () => Navigator.pushReplacementNamed(
                         context, Routes.customerRecords),
-              ),
-              _createDrawerItem(
-                icon: Icons.credit_card,
-                text: 'Billing',
-                onTap: () =>
-                    Navigator.pushReplacementNamed(
+                  ),
+                  _createDrawerItem(
+                    icon: Icons.credit_card,
+                    text: 'Billing',
+                    onTap: () => Navigator.pushReplacementNamed(
                         context, Routes.customerBilling),
-              ),
-              _createDrawerItem(
-                icon: Icons.message,
-                text: 'Contact Us',
-                onTap: () =>
-                    Navigator.pushReplacementNamed(context, Routes.contactUs),
-              ),
-              const Divider(),
-              _createDrawerItem(
-                  icon: Icons.logout,
-                  text: 'Sign Out',
-                  onTap: () async {
-                    await AuthMethods().signOut();
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const SignIn(),
-                      ),
-                    );
-                  }),
+                  ),
+                  _createDrawerItem(
+                    icon: Icons.message,
+                    text: 'Contact Us',
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, Routes.contactUs),
+                  ),
+                  const Divider(),
+                  _createDrawerItem(
+                      icon: Icons.logout,
+                      text: 'Sign Out',
+                      onTap: () async {
+                        await AuthMethods().signOut();
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const SignIn(),
+                          ),
+                        );
+                      }),
                 ],
               ),
             );
           }
-       }
-      );
-   }
+        });
+  }
 }

@@ -6,13 +6,18 @@ class MyUser {
   final String displayName;
   final String meterNumber;
   final String userType;
+  final bool isVerified;
+  final String phoneNumber;
 
-  const MyUser(
-      {required this.displayName,
-      required this.uid,
-      required this.email,
-      required this.meterNumber,
-      this.userType = 'customer'});
+  const MyUser({
+    required this.displayName,
+    required this.uid,
+    required this.email,
+    required this.meterNumber,
+    this.userType = 'customer',
+    this.isVerified = false,
+    this.phoneNumber = '',
+  });
 
   Map<String, dynamic> toJson() => {
         'displayName': displayName,
@@ -20,6 +25,8 @@ class MyUser {
         'email': email,
         'meterNumber': meterNumber,
         'userType': userType,
+        'isVerified': isVerified,
+        'phoneNumber': phoneNumber,
       };
 
   static MyUser fromSnapshot(DocumentSnapshot snap) {
@@ -31,6 +38,8 @@ class MyUser {
       email: snapshot['email'],
       meterNumber: snapshot['meterNumber'],
       userType: snapshot['userType'],
+      isVerified: snapshot['isVerified'],
+      phoneNumber: snapshot['phoneNumber'],
     );
   }
 }

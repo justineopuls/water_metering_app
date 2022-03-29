@@ -6,8 +6,8 @@ import 'package:water_metering_app/routes/routes.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
 import 'package:water_metering_app/services/auth_methods.dart';
 
-class AdminDrawer extends StatelessWidget {
-  const AdminDrawer({Key? key}) : super(key: key);
+class MeterReaderDrawer extends StatelessWidget {
+  const MeterReaderDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,45 +21,14 @@ class AdminDrawer extends StatelessWidget {
             icon: Icons.home,
             text: 'Home',
             onTap: () =>
-                Navigator.pushReplacementNamed(context, Routes.adminHome),
+                Navigator.pushReplacementNamed(context, Routes.meterReaderHome),
           ),
           const Divider(),
           _createDrawerItem(
             icon: Icons.cloud_upload,
             text: 'Upload',
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, Routes.photoUpload),
-          ),
-          _createDrawerItem(
-            icon: Icons.computer,
-            text: 'View Database',
             onTap: () => Navigator.pushReplacementNamed(
-                context, Routes.databaseChecking),
-          ),
-          _createDrawerItem(
-            icon: Icons.message,
-            text: 'Complaints Handling',
-            onTap: () => Navigator.pushReplacementNamed(
-                context, Routes.complaintHandling),
-          ),
-          const Divider(),
-          _createDrawerItem(
-            icon: Icons.person_add,
-            text: 'Create Customer Account',
-            onTap: () => Navigator.pushReplacementNamed(
-                context, Routes.addCustomerAccount),
-          ),
-          _createDrawerItem(
-            icon: Icons.person_add_alt,
-            text: 'Create Meter Reader Account',
-            onTap: () => Navigator.pushReplacementNamed(
-                context, Routes.addMeterReaderAccount),
-          ),
-          _createDrawerItem(
-            icon: Icons.check,
-            text: 'Validate Users',
-            onTap: () => Navigator.pushReplacementNamed(
-                context, Routes.validateCustomerAccount),
+                context, Routes.meterReaderUpload),
           ),
           const Divider(),
           _createDrawerItem(

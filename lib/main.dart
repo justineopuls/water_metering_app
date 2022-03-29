@@ -8,16 +8,21 @@ import 'package:water_metering_app/responsive/mobile_screen_layout.dart';
 import 'package:water_metering_app/responsive/responsive_layout.dart';
 import 'package:water_metering_app/responsive/web_screen_layout.dart';
 import 'package:water_metering_app/routes/routes.dart';
+import 'package:water_metering_app/screens/admin_home/add_meter_reader_account.dart';
 import 'package:water_metering_app/screens/admin_home/admin_home.dart';
 import 'package:water_metering_app/screens/admin_home/complaint_handling.dart';
+import 'package:water_metering_app/screens/admin_home/add_customer_account.dart';
 import 'package:water_metering_app/screens/admin_home/database_checking.dart';
 import 'package:water_metering_app/screens/admin_home/photo_upload.dart';
+import 'package:water_metering_app/screens/admin_home/validate_customer_account.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
 import 'package:water_metering_app/screens/customer_home/contact_us.dart';
 import 'package:water_metering_app/screens/customer_home/customer_billing.dart';
 import 'package:water_metering_app/screens/customer_home/customer_home.dart';
 import 'package:water_metering_app/screens/customer_home/customer_profile.dart';
 import 'package:water_metering_app/screens/customer_home/edit_profile.dart';
+import 'package:water_metering_app/screens/meter_reader_home/meter_reader_home.dart';
+import 'package:water_metering_app/screens/meter_reader_home/meter_reader_upload.dart';
 import 'package:water_metering_app/widgets/change_username.dart';
 import 'package:water_metering_app/widgets/change_email.dart';
 import 'package:water_metering_app/widgets/change_number.dart';
@@ -87,11 +92,11 @@ class MyApp extends StatelessWidget {
           // Customer Routes
           Routes.customerHome: (context) => const CustomerHome(),
           Routes.customerProfile: (context) => const CustomerProfile(),
-          Routes.editProfile: (context) => EditProfile(),
-          Routes.changeUsername: (context) => ChangeUsername(),
-          Routes.changeEmail: (context) => ChangeEmail(),
-          Routes.changeNumber: (context) => ChangeNumber(),
-          Routes.changePassword: (context) => ChangePassword(),
+          Routes.editProfile: (context) => const EditProfile(),
+          Routes.changeUsername: (context) => const ChangeUsername(),
+          Routes.changeEmail: (context) => const ChangeEmail(),
+          Routes.changeNumber: (context) => const ChangeNumber(),
+          Routes.changePassword: (context) => const ChangePassword(),
           Routes.customerRecords: (context) => const CustomerRecords(),
           Routes.customerBilling: (context) => const CustomerBilling(),
           Routes.contactUs: (context) => const ContactUs(),
@@ -101,9 +106,17 @@ class MyApp extends StatelessWidget {
           Routes.complaintHandling: (context) => const ComplaintHandling(),
           Routes.databaseChecking: (context) => const DatabaseChecking(),
           Routes.photoUpload: (context) => const PhotoUpload(),
+          Routes.addCustomerAccount: (context) => const AddCustomerAccount(),
+          Routes.addMeterReaderAccount: (context) =>
+              const AddMeterReaderAccount(),
+          Routes.validateCustomerAccount: (context) =>
+              const ValidateCustomerAccount(),
+
+          // Meter Reader Routes
+          Routes.meterReaderHome: (context) => const MeterReaderHome(),
+          Routes.meterReaderUpload: (context) => const MeterReaderUpload(),
         },
       ),
     );
-
   }
 }
