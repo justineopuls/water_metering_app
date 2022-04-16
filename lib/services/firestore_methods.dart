@@ -1,10 +1,11 @@
 import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:water_metering_app/models/admin_image.dart';
 import 'package:water_metering_app/models/complaints.dart';
 import 'package:water_metering_app/services/storage_methods.dart';
+import '../models/billings.dart';
 
 class FirestoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -54,6 +55,67 @@ class FirestoreMethods {
         _firestore.collection('complaints').doc(complaintId).set(
               complaint.toJson(),
             );
+        result = 'success';
+      }
+    } catch (e) {
+      result = e.toString();
+    }
+    return result;
+  }
+
+  // Upload Billing Statement
+  Future<String> uploadBillingStatement(
+      file,
+      String uid,
+      String meterNumber,
+      String photoLocation,
+      String photoDateTime,
+      ) async {
+    String result = 'Some error occured.';
+    try {
+      if (file != null) {
+        print('File Selected');
+        if (kIsWeb == false){
+          String pdfUrl = await StorageMethods().uploadPdfToStorageFromMobile('billings/$meterNumber', file);
+          String pdfId = const Uuid().v1();
+          Billing billing = Billing(
+            uid: uid,
+            datePublished: DateTime.now(),
+            pdfId: pdfId,
+            pdfUrl: pdfUrl,
+            photoLocation: photoLocation,
+            photoDateTime: photoDateTime,
+          );
+          _firestore.collection('admin_uploads').doc(meterNumber).collection('billings').doc(pdfId).set(
+            billing.toJson(),
+          );
+          result = 'success';
+        } else {
+          String pdfUrl = await StorageMethods().uploadPdfToStorageFromWeb('billings/$meterNumber', file);
+          String pdfId = const Uuid().v1();
+          Billing billing = Billing(
+            uid: uid,
+            datePublished: DateTime.now(),
+            pdfId: pdfId,
+            pdfUrl: pdfUrl,
+            photoLocation: photoLocation,
+            photoDateTime: photoDateTime,
+          );
+          _firestore.collection('admin_uploads').doc(meterNumber).collection('billings').doc(pdfId).set(
+            billing.toJson(),
+          );
+          result = 'success';
+        }
+      } else {
+        String pdfId = const Uuid().v1();
+        Billing billing = Billing(
+          uid: uid,
+          datePublished: DateTime.now(),
+          pdfId: pdfId,
+        );
+        _firestore.collection('admin_uploads').doc(meterNumber).collection('billings').doc(pdfId).set(
+          billing.toJson(),
+        );
         result = 'success';
       }
     } catch (e) {

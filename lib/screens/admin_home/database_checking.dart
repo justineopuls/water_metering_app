@@ -1,10 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:water_metering_app/widgets/admin_drawer.dart';
+import 'package:water_metering_app/utils/loading.dart';
+import 'package:water_metering_app/widgets/meter_number_card.dart';
 
-class DatabaseChecking extends StatelessWidget {
+import '../../widgets/reading_card.dart';
+
+class DatabaseChecking extends StatefulWidget {
   const DatabaseChecking({Key? key}) : super(key: key);
-
   static const String routeName = '/database_checking';
+
+  @override
+  _DatabaseCheckingState createState() => _DatabaseCheckingState();
+}
+
+class _DatabaseCheckingState extends State<DatabaseChecking> {
+  String? search;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +25,24 @@ class DatabaseChecking extends StatelessWidget {
         title: Text('Database Checking'),
       ),
       drawer: const AdminDrawer(),
-      body: Center(
-        child: const Text('Database Checking Screen'),
+      body: Column(
+        children: [
+          StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('users').where('userType', isEqualTo: 'customer').snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Loading();
+              } else {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (context, index) => MeterNumberCard(
+                        snapshot: snapshot.data!.docs[index].data())
+                );
+              }
+            }
+          )
+        ],
       ),
     );
   }

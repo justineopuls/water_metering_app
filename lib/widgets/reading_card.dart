@@ -102,7 +102,6 @@ class ReadingListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('tanginamo');
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10,5,10,0),

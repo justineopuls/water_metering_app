@@ -10,14 +10,13 @@ import 'package:intl/intl.dart';
 
 class CustomerBilling extends StatefulWidget {
   const CustomerBilling({Key? key}) : super(key: key);
-  static const String routeName = '/customer_billing';
+  static const String routeName = '/view_customer_billing';
 
   @override
   _CustomerBillingState createState() => _CustomerBillingState();
 }
 
 class _CustomerBillingState extends State<CustomerBilling> {
-  //final items =  ['November 2021','December 2021','January 2022','February 2022','March 2022'];
 
   final Widget? hint = const Text('Please choose billing date...',
       style: TextStyle(fontStyle: FontStyle.italic));
@@ -49,6 +48,8 @@ class _CustomerBillingState extends State<CustomerBilling> {
                   return const Loading();
                 } else {
                     return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           margin: EdgeInsets.fromLTRB(20, 50, 20, 20),
