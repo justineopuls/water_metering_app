@@ -8,37 +8,39 @@ class UserNotVerified extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: const Text('User Not Verified'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: ListView(
-          children: <Widget>[
-            Center(
-              child: const Text(
-                  'This user is currently unverified. Please wait for a customer service representative to validate your account.'),
-            ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.teal,
+      //   title: const Text('User Not Verified'),
+      // ),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          child: ListView(
+            children: <Widget>[
+              const Center(
+                child: Text(
+                    'This user is currently unverified. Please wait for a customer service representative to validate your account.'),
+              ),
 
-            const SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
 
-            // Sign Up Button
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.teal, // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                child: const Text('Sign Out'),
-                onPressed: () {
-                  AuthMethods().signOut();
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const SignIn(),
-                    ),
-                  );
-                }),
-          ],
+              // Sign Up Button
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.teal, // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  child: const Text('Sign Out'),
+                  onPressed: () {
+                    AuthMethods().signOut();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const SignIn(),
+                      ),
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
     );
