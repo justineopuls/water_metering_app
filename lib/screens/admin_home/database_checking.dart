@@ -15,33 +15,89 @@ class DatabaseChecking extends StatefulWidget {
 }
 
 class _DatabaseCheckingState extends State<DatabaseChecking> {
-  String? search;
+  String? searchValue;
+  Widget customSearchBar = const Text('Database Checking');
+  Widget customBody = StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('users').where('userType', isEqualTo: 'customer').snapshots(),
+      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Loading();
+        } else {
+          return ListView.builder(
+              shrinkWrap: true,
+              itemCount: snapshot.data?.docs.length,
+              itemBuilder: (context, index) => MeterNumberCard(
+                  snapshot: snapshot.data!.docs[index].data())
+          );
+        }
+      }
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Text('Database Checking'),
+        title: customSearchBar,
+        actions: [
+          IconButton(
+              onPressed: (){
+                setState(() {
+                  customSearchBar = TextField(
+                      decoration: InputDecoration(
+                      hintText: 'search for meter number...',
+                      //
+                      hintStyle:
+                        TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    onSubmitted: (value){
+                        searchValue = value;
+                        customBody = StreamBuilder(
+                            stream: FirebaseFirestore.instance.collection('users').where('meterNumber', isEqualTo: searchValue).snapshots(),
+                            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const Loading();
+                              } else {
+                                return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data?.docs.length,
+                                    itemBuilder: (context, index) => MeterNumberCard(
+                                        snapshot: snapshot.data!.docs[index].data())
+                                );
+                              }
+                            }
+                        );
+                    },
+                  );
+                });
+              },
+              icon: const Icon(Icons.search),
+          )
+        ],
       ),
       drawer: const AdminDrawer(),
       body: Column(
-        children: [
-          StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('users').where('userType', isEqualTo: 'customer').snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Loading();
-              } else {
-                return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data?.docs.length,
-                    itemBuilder: (context, index) => MeterNumberCard(
-                        snapshot: snapshot.data!.docs[index].data())
-                );
-              }
-            }
-          )
+        children: [ customBody
+          // StreamBuilder(
+          //   stream: FirebaseFirestore.instance.collection('users').where('userType', isEqualTo: 'customer').snapshots(),
+          //   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Loading();
+          //     } else {
+          //       return ListView.builder(
+          //           shrinkWrap: true,
+          //           itemCount: snapshot.data?.docs.length,
+          //           itemBuilder: (context, index) => MeterNumberCard(
+          //               snapshot: snapshot.data!.docs[index].data())
+          //       );
+          //       }
+          //     }
+          // )
         ],
       ),
     );
