@@ -17,7 +17,6 @@ class CustomerBilling extends StatefulWidget {
 }
 
 class _CustomerBillingState extends State<CustomerBilling> {
-
   final Widget? hint = const Text('Please choose billing date...',
       style: TextStyle(fontStyle: FontStyle.italic));
   String? value;
@@ -29,9 +28,7 @@ class _CustomerBillingState extends State<CustomerBilling> {
 
   @override
   Widget build(BuildContext context) {
-    final MyUser? user = Provider
-        .of<UserProvider>(context)
-        .getUser;
+    final MyUser? user = Provider.of<UserProvider>(context).getUser;
     final String? meterNumber = user?.meterNumber;
     return Scaffold(
       appBar: AppBar(
@@ -42,72 +39,79 @@ class _CustomerBillingState extends State<CustomerBilling> {
       body: Column(
         children: [
           StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('admin_uploads').doc(meterNumber).collection('billings').snapshots(),
-              builder:(context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              stream: FirebaseFirestore.instance
+                  .collection('admin_uploads')
+                  .doc(meterNumber)
+                  .collection('billings')
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Loading();
                 } else {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(20, 50, 20, 20),
-                          width: 350,
-                          padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                          decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black45, width:2),
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                        width: 350,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black45, width: 2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: DropdownButtonHideUnderline(
-                          child:
-                            DropdownButton(
-                                hint: hint,
-                                disabledHint: hint,
-                                isExpanded: true,
-                                value: value,
-                                items: snapshot.data?.docs.map((value) {
-                                  return DropdownMenuItem(
-                                    value: value.get('pdfUrl'),
-                                    child: Center(
-                                      child: Text(DateFormat.yMMMd().add_jm().format(DateTime.parse(value.get('datePublished').toDate().toString())))
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(
-                                        () {
-                                      this.value = value.toString();
-                                    },
-                                  );
+                          child: DropdownButton(
+                            hint: hint,
+                            disabledHint: hint,
+                            isExpanded: true,
+                            value: value,
+                            items: snapshot.data?.docs.map((value) {
+                              return DropdownMenuItem(
+                                value: value.get('pdfUrl'),
+                                child: Center(
+                                    child: Text(DateFormat.yMMMd()
+                                        .add_jm()
+                                        .format(DateTime.parse(value
+                                            .get('datePublished')
+                                            .toDate()
+                                            .toString())))),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  this.value = value.toString();
                                 },
-                            ),
+                              );
+                            },
                           ),
                         ),
-                        Container(
-                          padding:  EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                          margin: EdgeInsets.fromLTRB(70,0,70,0),
+                      ),
+                      Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                          margin: EdgeInsets.fromLTRB(70, 0, 70, 0),
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black45, width:1),
+                            border: Border.all(color: Colors.black45, width: 1),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: TextButton(
-                              onPressed: (){
+                              onPressed: () {
                                 launchURL(value!);
                               },
-                              child: Text('DOWNLOAD BILLING STATEMENT')
-                          )
-                        ),
-                      ],
-                    );
-                  }
-              }
-          )
+                              child: Text('DOWNLOAD BILLING STATEMENT'))),
+                    ],
+                  );
+                }
+              })
         ],
       ),
     );
   }
 }
+
 launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);

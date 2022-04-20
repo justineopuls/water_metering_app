@@ -39,13 +39,13 @@ class Routes {
 
   // Admin Routes
   static const String adminHome = AdminHome.routeName;
-  //static const String complaintHandling = ComplaintHandling.routeName;
+  static const String complaintHandling = ComplaintHandling.routeName;
   static const String databaseChecking = DatabaseChecking.routeName;
   static const String viewDatabaseEntry = ViewDatabaseEntry.routeName;
   static const String viewCustomerDetails = ViewCustomerDetails.routeName;
-  //static const String viewCustomerRecords = ViewCustomerRecords.routeName;
+  static const String viewCustomerRecords = ViewCustomerRecords.routeName;
   static const String viewCustomerBilling = ViewCustomerBilling.routeName;
-  //static const String uploadBillingStatement = UploadBillingStatement.routeName;
+  static const String uploadBillingStatement = UploadBillingStatement.routeName;
   static const String photoUpload = PhotoUpload.routeName;
   static const String addCustomerAccount = AddCustomerAccount.routeName;
   static const String addMeterReaderAccount = AddMeterReaderAccount.routeName;

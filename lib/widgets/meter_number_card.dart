@@ -10,28 +10,23 @@ class MeterNumberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:
-        GestureDetector(
-          onTap: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) => ViewDatabaseEntry(meterNumber: snapshot['meterNumber'], uid: snapshot['uid']),
-            )
-            );
-          },
-          child:
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Text('Meter Number: ' + snapshot['meterNumber'])
-                  ],
-                ),
-              )
-            ),
-        ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ViewDatabaseEntry(
+                    meterNumber: snapshot['meterNumber'], uid: snapshot['uid']),
+              ));
+        },
+        child: Card(
+            child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [Text('Meter Number: ' + snapshot['meterNumber'])],
+          ),
+        )),
+      ),
     );
   }
 }

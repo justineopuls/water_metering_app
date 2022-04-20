@@ -18,7 +18,6 @@ class ViewCustomerDetails extends StatefulWidget {
 }
 
 class _ViewCustomerDetailsState extends State<ViewCustomerDetails> {
-
   @override
   Widget build(BuildContext context) {
     //String currentMeterNumber = meterNumber;
@@ -26,7 +25,10 @@ class _ViewCustomerDetailsState extends State<ViewCustomerDetails> {
     //final String? uid = user?.uid;
 
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(widget.uid).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(widget.uid)
+            .snapshots(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -41,7 +43,10 @@ class _ViewCustomerDetailsState extends State<ViewCustomerDetails> {
                   padding: EdgeInsets.all(10),
                   children: [
                     ListTile(
-                      title: Text("Account Name",style: TextStyle(fontWeight: FontWeight.w500),),
+                      title: Text(
+                        "Account Name",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
                       subtitle: Text(snapshot.data!.data()['displayName']),
                       trailing: Icon(Icons.chevron_right, size: 30),
                       onTap: () {
@@ -50,12 +55,14 @@ class _ViewCustomerDetailsState extends State<ViewCustomerDetails> {
                             MaterialPageRoute(
                               builder: (context) =>
                                   ChangeUsername(uid: widget.uid),
-                            )
-                        );
+                            ));
                       },
                     ),
                     ListTile(
-                      title: Text("Phone Number",style: TextStyle(fontWeight: FontWeight.w500),),
+                      title: Text(
+                        "Phone Number",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
                       subtitle: Text(snapshot.data!.data()['phoneNumber']),
                       trailing: Icon(Icons.chevron_right, size: 30),
                       onTap: () {
@@ -64,22 +71,21 @@ class _ViewCustomerDetailsState extends State<ViewCustomerDetails> {
                             MaterialPageRoute(
                               builder: (context) =>
                                   ChangeNumber(uid: widget.uid),
-                            )
-                        );
+                            ));
                       },
                     ),
                     ListTile(
-                      title: Text("Email",style: TextStyle(fontWeight: FontWeight.w500),),
+                      title: Text(
+                        "Email",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
                       subtitle: Text(snapshot.data!.data()['email']),
                       trailing: Icon(Icons.chevron_right, size: 30),
-                      onTap: () {
-                      },
+                      onTap: () {},
                     ),
                   ],
-                )
-            );
+                ));
           }
-        }
-    );
+        });
   }
 }

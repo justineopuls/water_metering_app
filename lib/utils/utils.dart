@@ -3,7 +3,6 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:collection';
 import 'package:table_calendar/table_calendar.dart';
 
-
 pickImage(ImageSource source) async {
   final ImagePicker _imagePicker = ImagePicker();
 
@@ -23,7 +22,6 @@ showSnackBar(String content, BuildContext context) {
     ),
   );
 }
-
 
 // Home Page Calendar Utils
 class Event {
@@ -60,7 +58,7 @@ List<DateTime> daysInRange(DateTime first, DateTime last) {
   final dayCount = last.difference(first).inDays + 1;
   return List.generate(
     dayCount,
-        (index) => DateTime.utc(first.year, first.month, first.day + index),
+    (index) => DateTime.utc(first.year, first.month, first.day + index),
   );
 }
 

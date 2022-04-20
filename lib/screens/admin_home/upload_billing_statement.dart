@@ -11,22 +11,24 @@ import 'package:water_metering_app/utils/constants.dart';
 import 'package:water_metering_app/utils/utils.dart';
 
 class UploadBillingStatement extends StatefulWidget {
-  const UploadBillingStatement({Key? key, required this.meterNumber, required this.uid}) : super(key: key);
+  static const String routeName = '/upload_billing_statement';
+
+  const UploadBillingStatement(
+      {Key? key, required this.meterNumber, required this.uid})
+      : super(key: key);
   final String meterNumber;
   final String uid;
-
 
   @override
   _UploadBillingStatementState createState() => _UploadBillingStatementState();
 }
 
 class _UploadBillingStatementState extends State<UploadBillingStatement> {
-  var file,_file;
+  var file, _file;
   String fileName = '', displayText = 'No file chosen', buttonText = 'BROWSE';
   Color fileTextColor = Colors.black38;
   bool _isLoading = false;
   bool _isFileLoaded = false;
-
 
   // Choose pdf file from local storage
   void _pickFiles() async {
@@ -46,7 +48,7 @@ class _UploadBillingStatementState extends State<UploadBillingStatement> {
   }
 
   void updateText() {
-    setState((){
+    setState(() {
       displayText = fileName;
       buttonText = 'UPLOAD';
       fileTextColor = Colors.black;
@@ -70,9 +72,7 @@ class _UploadBillingStatementState extends State<UploadBillingStatement> {
         setState(() {
           _isLoading = false;
         });
-        showSnackBar(
-            'Upload successful.',
-            context);
+        showSnackBar('Upload successful.', context);
         Navigator.pop(context);
       } else {
         setState(() {
@@ -85,6 +85,7 @@ class _UploadBillingStatementState extends State<UploadBillingStatement> {
       showSnackBar(e.toString(), context);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,12 +94,11 @@ class _UploadBillingStatementState extends State<UploadBillingStatement> {
         backgroundColor: Colors.teal,
       ),
       body: Center(
-        child:
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 30),
-              Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: 30),
+            Container(
                 margin: EdgeInsets.all(20),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -111,27 +111,23 @@ class _UploadBillingStatementState extends State<UploadBillingStatement> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ElevatedButton(
-                        onPressed: (){
+                        onPressed: () {
                           if (_isFileLoaded) {
                             uploadFile();
                           } else {
                             _pickFiles();
                           }
                         },
-                        child: Text(buttonText)
-                    ),
+                        child: Text(buttonText)),
                     const SizedBox(width: 10),
                     Text(
                       displayText,
-                      style: TextStyle(
-                        color: fileTextColor
-                      ),
+                      style: TextStyle(color: fileTextColor),
                     )
                   ],
-                )
-              )
-            ],
-          ),
+                ))
+          ],
+        ),
       ),
     );
   }

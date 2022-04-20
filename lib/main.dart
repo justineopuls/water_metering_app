@@ -10,6 +10,7 @@ import 'package:water_metering_app/responsive/web_screen_layout.dart';
 import 'package:water_metering_app/routes/routes.dart';
 import 'package:water_metering_app/screens/admin_home/add_meter_reader_account.dart';
 import 'package:water_metering_app/screens/admin_home/admin_home.dart';
+import 'package:water_metering_app/screens/admin_home/upload_billing_statement.dart';
 import 'package:water_metering_app/screens/admin_home/view_customer_billing.dart';
 import 'package:water_metering_app/screens/admin_home/view_database_entry.dart';
 import 'package:water_metering_app/screens/admin_home/complaint_handling.dart';
@@ -109,16 +110,21 @@ class MyApp extends StatelessWidget {
 
           // Admin Routes
           Routes.adminHome: (context) => const AdminHome(),
-          //Routes.complaintHandling: (context) => const ComplaintHandling(),
+          Routes.complaintHandling: (context) => const ComplaintHandling(),
           Routes.databaseChecking: (context) => const DatabaseChecking(),
           Routes.viewDatabaseEntry: (context) =>
               const ViewDatabaseEntry(meterNumber: '', uid: ''),
           Routes.viewCustomerDetails: (context) =>
               const ViewCustomerDetails(uid: ''),
-          //Routes.viewCustomerRecords: (context) => const ViewCustomerRecords(meterNumber: ''),
+          Routes.viewCustomerRecords: (context) =>
+              const ViewCustomerRecords(meterNumber: ''),
           Routes.viewCustomerBilling: (context) =>
               const ViewCustomerBilling(meterNumber: '', uid: ''),
-          //Routes.uploadBillingStatement: (context) => const uploadBillingStatement(meterNumber: ''),
+          Routes.uploadBillingStatement: (context) =>
+              const UploadBillingStatement(
+                meterNumber: '',
+                uid: '',
+              ),
           Routes.photoUpload: (context) => const PhotoUpload(),
           Routes.addCustomerAccount: (context) => const AddCustomerAccount(),
           Routes.addMeterReaderAccount: (context) =>

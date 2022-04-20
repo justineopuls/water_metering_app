@@ -13,7 +13,6 @@ class ChangeNumber extends StatefulWidget {
   static const String routeName = '/change_number';
   final uid;
 
-
   @override
   _ChangeNumberState createState() => _ChangeNumberState();
 }
@@ -22,7 +21,8 @@ class _ChangeNumberState extends State<ChangeNumber> {
   @override
   Widget build(BuildContext context) {
     final MyUser? user = Provider.of<UserProvider>(context).getUser;
-    final CollectionReference userList = FirebaseFirestore.instance.collection('users');
+    final CollectionReference userList =
+        FirebaseFirestore.instance.collection('users');
     String? currentUid = user?.uid;
     String newPhoneNumber = 'placeholder';
 
@@ -32,11 +32,15 @@ class _ChangeNumberState extends State<ChangeNumber> {
 
     Future<void> updateUserInfo(String param, String newValue) async {
       return await userList.doc(currentUid).update({
-        param : newValue,
+        param: newValue,
       });
     }
+
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(currentUid).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUid)
+            .snapshots(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -50,11 +54,9 @@ class _ChangeNumberState extends State<ChangeNumber> {
                 children: [
                   Container(
                     padding: EdgeInsets.all(20),
-                    child:
-                    TextField(
+                    child: TextField(
                       controller: TextEditingController(),
-                      decoration:
-                      textInputDecoration.copyWith(
+                      decoration: textInputDecoration.copyWith(
                           hintText: 'Enter new phone number...'),
                       onChanged: (String value) {
                         newPhoneNumber = value;
@@ -69,10 +71,12 @@ class _ChangeNumberState extends State<ChangeNumber> {
                       onPressed: () async {
                         if (newPhoneNumber == 'placeholder') {
                           showSnackBar('Error in setting number.', context);
-                          updateUserInfo('phoneNumber', snapshot.data.data()['phoneNumber']);
+                          updateUserInfo('phoneNumber',
+                              snapshot.data.data()['phoneNumber']);
                         } else {
                           updateUserInfo('phoneNumber', newPhoneNumber);
-                          showSnackBar('Phone number changed successfully.', context);
+                          showSnackBar(
+                              'Phone number changed successfully.', context);
                         }
                       },
                     ),
@@ -81,7 +85,6 @@ class _ChangeNumberState extends State<ChangeNumber> {
               ),
             );
           }
-        }
-    );
+        });
   }
 }

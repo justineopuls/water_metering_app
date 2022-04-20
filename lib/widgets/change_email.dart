@@ -19,18 +19,22 @@ class _ChangeEmailState extends State<ChangeEmail> {
   @override
   Widget build(BuildContext context) {
     final MyUser? user = Provider.of<UserProvider>(context).getUser;
-    final CollectionReference userList = FirebaseFirestore.instance.collection('users');
+    final CollectionReference userList =
+        FirebaseFirestore.instance.collection('users');
     String? currentUid = user?.uid;
     String newEmail = 'placeholder';
 
     Future<void> updateUserInfo(String param, String newValue) async {
       return await userList.doc(currentUid).update({
-        param : newValue,
+        param: newValue,
       });
     }
 
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(currentUid).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUid)
+            .snapshots(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -44,11 +48,9 @@ class _ChangeEmailState extends State<ChangeEmail> {
                 children: [
                   Container(
                     padding: EdgeInsets.all(20),
-                    child:
-                    TextField(
+                    child: TextField(
                       controller: TextEditingController(),
-                      decoration:
-                      textInputDecoration.copyWith(
+                      decoration: textInputDecoration.copyWith(
                           hintText: 'Enter new email...'),
                       onChanged: (String value) {
                         newEmail = value;
@@ -57,11 +59,12 @@ class _ChangeEmailState extends State<ChangeEmail> {
                   ),
                   Container(
                     alignment: Alignment.bottomRight,
-                    padding: EdgeInsets.only(right:20),
+                    padding: EdgeInsets.only(right: 20),
                     child: TextButton(
                       child: Text('SAVE CHANGES'),
                       onPressed: () async {
-                        String result = await AuthMethods().updateEmail(newEmail);
+                        String result =
+                            await AuthMethods().updateEmail(newEmail);
                         showSnackBar(result, context);
                         if (result == "Successfully changed email") {
                           updateUserInfo('email', newEmail);
@@ -73,8 +76,6 @@ class _ChangeEmailState extends State<ChangeEmail> {
               ),
             );
           }
-        }
-    );
+        });
   }
 }
-

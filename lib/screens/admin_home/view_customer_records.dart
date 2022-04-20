@@ -4,9 +4,9 @@ import 'package:water_metering_app/utils/loading.dart';
 import 'package:water_metering_app/widgets/admin_drawer.dart';
 import 'package:water_metering_app/widgets/reading_card.dart';
 
-
 class ViewCustomerRecords extends StatefulWidget {
-  const ViewCustomerRecords({Key? key,required this.meterNumber}) : super(key: key);
+  const ViewCustomerRecords({Key? key, required this.meterNumber})
+      : super(key: key);
   static const String routeName = '/view_customer_records';
   final meterNumber;
   @override
@@ -23,9 +23,13 @@ class _ViewCustomerRecordsState extends State<ViewCustomerRecords> {
         ),
         drawer: const AdminDrawer(),
         body: StreamBuilder(
-          stream:
-          FirebaseFirestore.instance.collection('admin_uploads').doc(widget.meterNumber).collection('readings').snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          stream: FirebaseFirestore.instance
+              .collection('admin_uploads')
+              .doc(widget.meterNumber)
+              .collection('readings')
+              .snapshots(),
+          builder: (context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Loading();
             } else {

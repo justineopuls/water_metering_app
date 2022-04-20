@@ -36,12 +36,12 @@ class AdminDrawer extends StatelessWidget {
             onTap: () => Navigator.pushReplacementNamed(
                 context, Routes.databaseChecking),
           ),
-          // _createDrawerItem(
-          //   icon: Icons.message,
-          //   text: 'Complaints Handling',
-          //   onTap: () => Navigator.pushReplacementNamed(
-          //       context, Routes.complaintHandling),
-          // ),
+          _createDrawerItem(
+            icon: Icons.message,
+            text: 'Complaints Handling',
+            onTap: () => Navigator.pushReplacementNamed(
+                context, Routes.complaintHandling),
+          ),
           const Divider(),
           _createDrawerItem(
             icon: Icons.person_add,
@@ -61,12 +61,12 @@ class AdminDrawer extends StatelessWidget {
             onTap: () => Navigator.pushReplacementNamed(
                 context, Routes.validateCustomerAccount),
           ),
-          _createDrawerItem(
-            icon: Icons.delete,
-            text: 'Delete User Account',
-            onTap: () => Navigator.pushReplacementNamed(
-                context, Routes.deleteUserAccount),
-          ),
+          // _createDrawerItem(
+          //   icon: Icons.delete,
+          //   text: 'Delete User Account',
+          //   onTap: () => Navigator.pushReplacementNamed(
+          //       context, Routes.deleteUserAccount),
+          // ),
           const Divider(),
           _createDrawerItem(
               icon: Icons.logout,

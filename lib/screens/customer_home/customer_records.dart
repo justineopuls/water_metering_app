@@ -27,9 +27,13 @@ class _CustomerRecordsState extends State<CustomerRecords> {
         ),
         drawer: const CustomerDrawer(),
         body: StreamBuilder(
-          stream:
-          FirebaseFirestore.instance.collection('admin_uploads').doc(meterNumber).collection('readings').snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          stream: FirebaseFirestore.instance
+              .collection('admin_uploads')
+              .doc(meterNumber)
+              .collection('readings')
+              .snapshots(),
+          builder: (context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Loading();
             } else {

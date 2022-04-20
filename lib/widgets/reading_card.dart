@@ -15,11 +15,11 @@ class ReadingCard extends StatelessWidget {
       child: ReadingListView(
         thumbnail: snapshot['photoUrl'] == ''
             ? Container(
-          decoration: const BoxDecoration(color: Colors.pink),
-        )
+                decoration: const BoxDecoration(color: Colors.pink),
+              )
             : SizedBox(
-          child: Image.network(snapshot['photoUrl']),
-        ),
+                child: Image.network(snapshot['photoUrl']),
+              ),
         meterNumber: snapshot['meterNumber'],
         datePublished: DateFormat.yMMMd().format(
           snapshot['datePublished'].toDate(),
@@ -46,39 +46,36 @@ class _ReadingDetails extends StatelessWidget {
     return ListView(
       children: [
         ListTile(
-          title: const Text("Meter Number",
-           style: TextStyle(
-               fontSize: 12.5
-            ),
+          title: const Text(
+            "Meter Number",
+            style: TextStyle(fontSize: 12.5),
           ),
           subtitle: Text(
             meterNumber,
-            style: const TextStyle(
-            fontSize: 11),),
+            style: const TextStyle(fontSize: 11),
+          ),
           leading: const Icon(Icons.chevron_right, size: 30),
         ),
         ListTile(
-          title: const Text("Date",
-            style: TextStyle(
-                fontSize: 12.5
-            ),
+          title: const Text(
+            "Date",
+            style: TextStyle(fontSize: 12.5),
           ),
           subtitle: Text(
             datePublished,
-            style: const TextStyle(
-                fontSize: 11),),
+            style: const TextStyle(fontSize: 11),
+          ),
           leading: const Icon(Icons.chevron_right, size: 30),
         ),
         ListTile(
-          title: const Text("Location",
-            style: TextStyle(
-                fontSize: 12.5
-            ),
+          title: const Text(
+            "Location",
+            style: TextStyle(fontSize: 12.5),
           ),
           subtitle: const Text(
             'Marikina City, Philippines',
-            style: TextStyle(
-                fontSize: 11),),
+            style: TextStyle(fontSize: 11),
+          ),
           leading: Icon(Icons.chevron_right, size: 30),
         ),
       ],
@@ -101,41 +98,39 @@ class ReadingListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-      },
+      onTap: () {},
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10,5,10,0),
-        child:
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(217, 225, 223, 0.8),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Color.fromRGBO(215, 230, 227, 1)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: SizedBox(
-                height: 200,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    AspectRatio(
-                      aspectRatio: 1.1,
-                      child: thumbnail,
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(217, 225, 223, 0.8),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Color.fromRGBO(215, 230, 227, 1)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: SizedBox(
+              height: 200,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  AspectRatio(
+                    aspectRatio: 1.1,
+                    child: thumbnail,
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: _ReadingDetails(
+                      meterNumber: meterNumber,
+                      datePublished: datePublished,
                     ),
-                    SizedBox(
-                      width: 150,
-                      child: _ReadingDetails(
-                        meterNumber: meterNumber,
-                        datePublished: datePublished,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
+      ),
     );
   }
 }

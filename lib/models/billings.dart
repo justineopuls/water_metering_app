@@ -18,13 +18,13 @@ class Billing {
   });
 
   Map<String, dynamic> toJson() => {
-    'uid': uid,
-    'datePublished': datePublished,
-    'pdfId': pdfId,
-    'pdfUrl': pdfUrl,
-    'photoLocation': photoLocation,
-    'photoDateTime': photoDateTime,
-  };
+        'uid': uid,
+        'datePublished': datePublished,
+        'pdfId': pdfId,
+        'pdfUrl': pdfUrl,
+        'photoLocation': photoLocation,
+        'photoDateTime': photoDateTime,
+      };
 
   static Billing fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;

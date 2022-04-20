@@ -16,7 +16,6 @@ import 'package:water_metering_app/services/firestore_methods.dart';
 
 import '../../routes/routes.dart';
 
-
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
 
@@ -26,56 +25,63 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-
   @override
   Widget build(BuildContext context) {
     final MyUser? user = Provider.of<UserProvider>(context).getUser;
     final String? uid = user?.uid;
 
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else {
             return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.teal,
-                title: Text('Account Information'),
-              ),
-              drawer: CustomerDrawer(),
-              body: ListView(
-                padding: EdgeInsets.all(10),
-                children: [
-                  ListTile(
-                    title: Text("Account Name",style: TextStyle(fontWeight: FontWeight.w500),),
-                    subtitle: Text(snapshot.data.data()['displayName']),
-                    trailing: Icon(Icons.chevron_right, size: 30),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.changeUsername);
-                    },
-                  ),
-                  ListTile(
-                    title: Text("Mobile Number",style: TextStyle(fontWeight: FontWeight.w500),),
-                    subtitle: Text(snapshot.data.data()['phoneNumber']),
-                    trailing: Icon(Icons.chevron_right, size: 30),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.changeNumber);
-                    },
-                  ),
-                  ListTile(
-                    title: Text("Email",style: TextStyle(fontWeight: FontWeight.w500),),
-                    subtitle: Text(snapshot.data.data()['email']),
-                    trailing: Icon(Icons.chevron_right, size: 30),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.changeEmail);
-                    },
-                  ),
-                ],
-              )
-           );
+                appBar: AppBar(
+                  backgroundColor: Colors.teal,
+                  title: Text('Account Information'),
+                ),
+                drawer: CustomerDrawer(),
+                body: ListView(
+                  padding: EdgeInsets.all(10),
+                  children: [
+                    ListTile(
+                      title: Text(
+                        "Account Name",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(snapshot.data.data()['displayName']),
+                      trailing: Icon(Icons.chevron_right, size: 30),
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.changeUsername);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Mobile Number",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(snapshot.data.data()['phoneNumber']),
+                      trailing: Icon(Icons.chevron_right, size: 30),
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.changeNumber);
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Email",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(snapshot.data.data()['email']),
+                      trailing: Icon(Icons.chevron_right, size: 30),
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.changeEmail);
+                      },
+                    ),
+                  ],
+                ));
           }
-        }
-      );
-    }
+        });
+  }
 }

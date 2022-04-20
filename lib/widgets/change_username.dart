@@ -22,7 +22,8 @@ class _ChangeUsernameState extends State<ChangeUsername> {
   @override
   Widget build(BuildContext context) {
     final MyUser? user = Provider.of<UserProvider>(context).getUser;
-    final CollectionReference userList = FirebaseFirestore.instance.collection('users');
+    final CollectionReference userList =
+        FirebaseFirestore.instance.collection('users');
     String? currentUid = user?.uid;
     String newDisplayName = 'placeholder';
 
@@ -32,11 +33,15 @@ class _ChangeUsernameState extends State<ChangeUsername> {
 
     Future<void> updateUserInfo(String param, String newValue) async {
       return await userList.doc(currentUid).update({
-        param : newValue,
+        param: newValue,
       });
     }
+
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(currentUid).snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUid)
+            .snapshots(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -50,11 +55,9 @@ class _ChangeUsernameState extends State<ChangeUsername> {
                 children: [
                   Container(
                     padding: EdgeInsets.all(20),
-                    child:
-                    TextField(
+                    child: TextField(
                       controller: TextEditingController(),
-                      decoration:
-                      textInputDecoration.copyWith(
+                      decoration: textInputDecoration.copyWith(
                           hintText: 'Enter new name...'),
                       onChanged: (String value) {
                         newDisplayName = value;
@@ -69,10 +72,12 @@ class _ChangeUsernameState extends State<ChangeUsername> {
                       onPressed: () async {
                         if (newDisplayName == 'placeholder') {
                           showSnackBar('Error in setting name.', context);
-                          updateUserInfo('displayName', snapshot.data.data()['displayName']);
+                          updateUserInfo('displayName',
+                              snapshot.data.data()['displayName']);
                         } else {
                           updateUserInfo('displayName', newDisplayName);
-                          showSnackBar('Display name changed successfully.', context);
+                          showSnackBar(
+                              'Display name changed successfully.', context);
                         }
                       },
                     ),
@@ -81,7 +86,6 @@ class _ChangeUsernameState extends State<ChangeUsername> {
               ),
             );
           }
-        }
-      );
+        });
   }
 }
