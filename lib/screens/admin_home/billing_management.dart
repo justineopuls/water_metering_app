@@ -17,7 +17,7 @@ class BillingManagement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.teal, title: Text('Billing')),
-      drawer: const AdminDrawer(),
+      //drawer: const AdminDrawer(),
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [

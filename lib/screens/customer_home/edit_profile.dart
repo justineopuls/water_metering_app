@@ -42,7 +42,7 @@ class _EditProfileState extends State<EditProfile> {
                   backgroundColor: Colors.teal,
                   title: Text('Account Information'),
                 ),
-                drawer: CustomerDrawer(),
+                //drawer: CustomerDrawer(),
                 body: ListView(
                   padding: EdgeInsets.all(10),
                   children: [

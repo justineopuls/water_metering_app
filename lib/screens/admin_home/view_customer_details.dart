@@ -38,7 +38,7 @@ class _ViewCustomerDetailsState extends State<ViewCustomerDetails> {
                   backgroundColor: Colors.teal,
                   title: Text('Account Information'),
                 ),
-                drawer: AdminDrawer(),
+                //drawer: AdminDrawer(),
                 body: ListView(
                   padding: EdgeInsets.all(10),
                   children: [

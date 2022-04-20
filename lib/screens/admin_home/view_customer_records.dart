@@ -21,7 +21,7 @@ class _ViewCustomerRecordsState extends State<ViewCustomerRecords> {
           backgroundColor: Colors.teal,
           title: const Text('Records'),
         ),
-        drawer: const AdminDrawer(),
+        //drawer: const AdminDrawer(),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('admin_uploads')
