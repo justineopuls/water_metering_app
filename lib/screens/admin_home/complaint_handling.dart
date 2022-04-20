@@ -4,11 +4,16 @@ import 'package:water_metering_app/utils/loading.dart';
 import 'package:water_metering_app/widgets/admin_drawer.dart';
 import 'package:water_metering_app/widgets/complaint_card.dart';
 
-class ComplaintHandling extends StatelessWidget {
+class ComplaintHandling extends StatefulWidget {
   const ComplaintHandling({Key? key}) : super(key: key);
 
   static const String routeName = '/complaint_handling';
 
+  @override
+  State<ComplaintHandling> createState() => _ComplaintHandlingState();
+}
+
+class _ComplaintHandlingState extends State<ComplaintHandling> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +23,10 @@ class ComplaintHandling extends StatelessWidget {
         ),
         drawer: const AdminDrawer(),
         body: StreamBuilder(
-          stream:
-              FirebaseFirestore.instance.collection('complaints').snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('complaints')
+              .where('isResolved', isEqualTo: false)
+              .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {

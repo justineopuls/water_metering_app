@@ -13,6 +13,7 @@ import 'package:water_metering_app/screens/admin_home/admin_home.dart';
 import 'package:water_metering_app/screens/admin_home/complaint_handling.dart';
 import 'package:water_metering_app/screens/admin_home/add_customer_account.dart';
 import 'package:water_metering_app/screens/admin_home/database_checking.dart';
+import 'package:water_metering_app/screens/admin_home/delete_account.dart';
 import 'package:water_metering_app/screens/admin_home/photo_upload.dart';
 import 'package:water_metering_app/screens/admin_home/validate_customer_account.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
@@ -111,6 +112,7 @@ class MyApp extends StatelessWidget {
               const AddMeterReaderAccount(),
           Routes.validateCustomerAccount: (context) =>
               const ValidateCustomerAccount(),
+          Routes.deleteUserAccount: (context) => const DeleteAccount(),
 
           // Meter Reader Routes
           Routes.meterReaderHome: (context) => const MeterReaderHome(),

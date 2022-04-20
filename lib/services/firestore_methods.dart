@@ -17,6 +17,7 @@ class FirestoreMethods {
     String displayName,
     String photoLocation,
     String photoDateTime,
+    String meterNumber,
   ) async {
     String result = 'Some error occured.';
     try {
@@ -35,6 +36,7 @@ class FirestoreMethods {
           photoUrl: photoUrl,
           photoLocation: photoLocation,
           photoDateTime: photoDateTime,
+          meterNumber: meterNumber,
         );
 
         _firestore.collection('complaints').doc(complaintId).set(
@@ -49,6 +51,7 @@ class FirestoreMethods {
           displayName: displayName,
           datePublished: DateTime.now(),
           complaintId: complaintId,
+          meterNumber: meterNumber,
         );
 
         _firestore.collection('complaints').doc(complaintId).set(
@@ -95,6 +98,31 @@ class FirestoreMethods {
           .set(
             adminImage.toJson(),
           );
+      result = 'success';
+    } catch (e) {
+      result = e.toString();
+    }
+    return result;
+  }
+
+  Future<String> markComplaintAsResolved(String complaintId) async {
+    String result = 'Some error occured.';
+    try {
+      _firestore
+          .collection('complaints')
+          .doc(complaintId)
+          .update({'isResolved': true});
+      result = 'success';
+    } catch (e) {
+      result = e.toString();
+    }
+    return result;
+  }
+
+  Future<String> verifyUserAccount(String uid) async {
+    String result = 'Some error occured.';
+    try {
+      _firestore.collection('users').doc(uid).update({'isVerified': true});
       result = 'success';
     } catch (e) {
       result = e.toString();

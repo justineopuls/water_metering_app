@@ -61,6 +61,12 @@ class AdminDrawer extends StatelessWidget {
             onTap: () => Navigator.pushReplacementNamed(
                 context, Routes.validateCustomerAccount),
           ),
+          _createDrawerItem(
+            icon: Icons.delete,
+            text: 'Delete User Account',
+            onTap: () => Navigator.pushReplacementNamed(
+                context, Routes.deleteUserAccount),
+          ),
           const Divider(),
           _createDrawerItem(
               icon: Icons.logout,

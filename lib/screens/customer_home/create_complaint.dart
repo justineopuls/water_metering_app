@@ -66,6 +66,7 @@ class _CreateComplaintState extends State<CreateComplaint> {
     String displayName,
     String photoLocation,
     String photoDateTime,
+    String meterNumber,
   ) async {
     setState(() {
       _isLoading = true;
@@ -78,6 +79,7 @@ class _CreateComplaintState extends State<CreateComplaint> {
         displayName,
         photoLocation,
         photoDateTime,
+        meterNumber,
       );
 
       if (result == 'success') {
@@ -196,6 +198,7 @@ class _CreateComplaintState extends State<CreateComplaint> {
                         user.displayName,
                         'Test Location',
                         'Test Date Time',
+                        user.meterNumber,
                       );
                     }
                   }),

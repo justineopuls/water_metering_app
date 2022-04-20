@@ -10,6 +10,7 @@ class Complaint {
   final String photoLocation;
   final String photoDateTime;
   final bool isResolved;
+  final String meterNumber;
 
   const Complaint({
     required this.description,
@@ -21,6 +22,7 @@ class Complaint {
     this.photoLocation = '',
     this.photoDateTime = '',
     this.isResolved = false,
+    required this.meterNumber,
   });
 
   Map<String, dynamic> toJson() => {
@@ -33,21 +35,22 @@ class Complaint {
         'photoLocation': photoLocation,
         'photoDateTime': photoDateTime,
         'isResolved': isResolved,
+        'meterNumber': meterNumber,
       };
 
   static Complaint fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
     return Complaint(
-      description: snapshot['description'],
-      uid: snapshot['uid'],
-      displayName: snapshot['displayName'],
-      datePublished: snapshot['datePublished'],
-      complaintId: snapshot['complaintId'],
-      photoUrl: snapshot['photoUrl'],
-      photoLocation: snapshot['photoLocation'],
-      photoDateTime: snapshot['photoDateTime'],
-      isResolved: snapshot['isResolved'],
-    );
+        description: snapshot['description'],
+        uid: snapshot['uid'],
+        displayName: snapshot['displayName'],
+        datePublished: snapshot['datePublished'],
+        complaintId: snapshot['complaintId'],
+        photoUrl: snapshot['photoUrl'],
+        photoLocation: snapshot['photoLocation'],
+        photoDateTime: snapshot['photoDateTime'],
+        isResolved: snapshot['isResolved'],
+        meterNumber: snapshot['meterNumber']);
   }
 }
