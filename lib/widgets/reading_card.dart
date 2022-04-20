@@ -44,8 +44,12 @@ class _ReadingDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.all(0.0),
       children: [
         ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
           title: const Text(
             "Meter Number",
             style: TextStyle(fontSize: 12.5),
@@ -54,9 +58,12 @@ class _ReadingDetails extends StatelessWidget {
             meterNumber,
             style: const TextStyle(fontSize: 11),
           ),
-          leading: const Icon(Icons.chevron_right, size: 30),
+          //leading: const Icon(Icons.chevron_right, size: 30),
         ),
         ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
           title: const Text(
             "Date",
             style: TextStyle(fontSize: 12.5),
@@ -65,9 +72,12 @@ class _ReadingDetails extends StatelessWidget {
             datePublished,
             style: const TextStyle(fontSize: 11),
           ),
-          leading: const Icon(Icons.chevron_right, size: 30),
+          //leading: const Icon(Icons.chevron_right, size: 30),
         ),
         ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
           title: const Text(
             "Location",
             style: TextStyle(fontSize: 12.5),
@@ -76,7 +86,7 @@ class _ReadingDetails extends StatelessWidget {
             'Marikina City, Philippines',
             style: TextStyle(fontSize: 11),
           ),
-          leading: Icon(Icons.chevron_right, size: 30),
+          //leading: Icon(Icons.chevron_right, size: 30),
         ),
       ],
     );
@@ -114,8 +124,12 @@ class ReadingListView extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  AspectRatio(
-                    aspectRatio: 1.1,
+                  // AspectRatio(
+                  //   aspectRatio: 1,
+                  //   child: thumbnail,
+                  // ),
+                  Padding(
+                    padding: EdgeInsets.all(10),
                     child: thumbnail,
                   ),
                   SizedBox(
