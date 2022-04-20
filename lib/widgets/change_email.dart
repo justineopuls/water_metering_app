@@ -20,17 +20,17 @@ class _ChangeEmailState extends State<ChangeEmail> {
   Widget build(BuildContext context) {
     final MyUser? user = Provider.of<UserProvider>(context).getUser;
     final CollectionReference userList = FirebaseFirestore.instance.collection('users');
-    final String? uid = user?.uid;
+    String? currentUid = user?.uid;
     String newEmail = 'placeholder';
 
     Future<void> updateUserInfo(String param, String newValue) async {
-      return await userList.doc(uid).update({
+      return await userList.doc(currentUid).update({
         param : newValue,
       });
     }
 
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+        stream: FirebaseFirestore.instance.collection('users').doc(currentUid).snapshots(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -40,7 +40,6 @@ class _ChangeEmailState extends State<ChangeEmail> {
                 title: Text('Edit Account Email'),
                 backgroundColor: Colors.teal,
               ),
-              drawer: CustomerDrawer(),
               body: ListView(
                 children: [
                   Container(

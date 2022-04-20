@@ -10,9 +10,10 @@ import 'package:water_metering_app/utils/constants.dart';
 import 'package:water_metering_app/routes/routes.dart';
 
 class ChangeUsername extends StatefulWidget {
-  const ChangeUsername({Key? key}) : super(key: key);
-
+  const ChangeUsername({Key? key, required this.uid}) : super(key: key);
   static const String routeName = '/change_username';
+  final uid;
+
   @override
   _ChangeUsernameState createState() => _ChangeUsernameState();
 }
@@ -22,16 +23,20 @@ class _ChangeUsernameState extends State<ChangeUsername> {
   Widget build(BuildContext context) {
     final MyUser? user = Provider.of<UserProvider>(context).getUser;
     final CollectionReference userList = FirebaseFirestore.instance.collection('users');
-    final String? uid = user?.uid;
+    String? currentUid = user?.uid;
     String newDisplayName = 'placeholder';
 
+    if (user?.userType == 'admin') {
+      currentUid = widget.uid;
+    }
+
     Future<void> updateUserInfo(String param, String newValue) async {
-      return await userList.doc(uid).update({
+      return await userList.doc(currentUid).update({
         param : newValue,
       });
     }
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+        stream: FirebaseFirestore.instance.collection('users').doc(currentUid).snapshots(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -41,7 +46,6 @@ class _ChangeUsernameState extends State<ChangeUsername> {
                 title: Text('Edit Account Name'),
                 backgroundColor: Colors.teal,
               ),
-              drawer: CustomerDrawer(),
               body: ListView(
                 children: [
                   Container(

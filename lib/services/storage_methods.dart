@@ -1,8 +1,6 @@
 import 'dart:typed_data';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class StorageMethods {
@@ -21,6 +19,33 @@ class StorageMethods {
     }
     UploadTask uploadTask = ref.putData(file);
 
+    TaskSnapshot snapshot = await uploadTask;
+    String downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  // Add pdf to firebase storage
+  Future<String> uploadPdfToStorageFromMobile(
+      String childName, file) async {
+
+    Reference ref =
+    _storage.ref().child(childName).child(_auth.currentUser!.uid);
+    String pdfId = const Uuid().v1();
+    ref = ref.child(pdfId);
+    UploadTask uploadTask = ref.putFile(file, SettableMetadata(contentType: 'application/pdf'));
+    TaskSnapshot snapshot = await uploadTask;
+    String downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  Future<String> uploadPdfToStorageFromWeb(
+      String childName, file) async {
+
+    Reference ref =
+    _storage.ref().child(childName).child(_auth.currentUser!.uid);
+    String pdfId = const Uuid().v1();
+    ref = ref.child(pdfId);
+    UploadTask uploadTask = ref.putData(file, SettableMetadata(contentType: 'application/pdf'));
     TaskSnapshot snapshot = await uploadTask;
     String downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;

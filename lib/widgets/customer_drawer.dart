@@ -48,8 +48,8 @@ class CustomerDrawer extends StatelessWidget {
                     decoration: const BoxDecoration(
                       color: Colors.teal,
                     ),
-                    accountName: Text(snapshot.data?.data()['displayName']),
-                    accountEmail: Text(snapshot.data?.data()['email']),
+                    accountName: Text(snapshot.data!.data()['displayName']),
+                    accountEmail: Text(snapshot.data!.data()['email']),
                     currentAccountPicture: const CircleAvatar(
                       backgroundColor: Colors.grey,
                       child: Icon(Icons.person, color: Colors.white, size: 60),
