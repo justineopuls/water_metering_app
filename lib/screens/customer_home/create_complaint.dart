@@ -19,6 +19,8 @@ class CreateComplaint extends StatefulWidget {
 class _CreateComplaintState extends State<CreateComplaint> {
   Uint8List? _file;
   bool _isLoading = false;
+  String photoLocation = '';
+  var photoDateTime = '';
   final TextEditingController _descriptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -37,8 +39,12 @@ class _CreateComplaintState extends State<CreateComplaint> {
                   Uint8List file = await pickImage(
                     ImageSource.camera,
                   );
+                  String location = await getExifLocation(file);
+                  String dateTime = await getExifDateTime(file);
                   setState(() {
                     _file = file;
+                    photoLocation = location;
+                    photoDateTime = dateTime;
                   });
                 },
               ),
@@ -50,8 +56,12 @@ class _CreateComplaintState extends State<CreateComplaint> {
                   Uint8List file = await pickImage(
                     ImageSource.gallery,
                   );
+                  String location = await getExifLocation(file);
+                  String dateTime = await getExifDateTime(file);
                   setState(() {
                     _file = file;
+                    photoLocation = location;
+                    photoDateTime = dateTime;
                   });
                 },
               ),
@@ -195,8 +205,8 @@ class _CreateComplaintState extends State<CreateComplaint> {
                       postComplaint(
                         user!.uid,
                         user.displayName,
-                        'Test Location',
-                        'Test Date Time',
+                        photoLocation,
+                        photoDateTime,
                         user.meterNumber,
                       );
                     }

@@ -24,6 +24,7 @@ class ReadingCard extends StatelessWidget {
         datePublished: DateFormat.yMMMd().format(
           snapshot['datePublished'].toDate(),
         ),
+        photoLocation: snapshot['photoLocation'],
       ),
     );
   }
@@ -35,11 +36,13 @@ class _ReadingDetails extends StatelessWidget {
     //required this.displayName,
     required this.meterNumber,
     required this.datePublished,
+    required this.photoLocation,
   }) : super(key: key);
 
   //final String displayName;
   final String meterNumber;
   final String datePublished;
+  final String photoLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class _ReadingDetails extends StatelessWidget {
             meterNumber,
             style: const TextStyle(fontSize: 11),
           ),
-          //leading: const Icon(Icons.chevron_right, size: 30),
+          // leading: const Icon(Icons.chevron_right, size: 30),
         ),
         ListTile(
           dense: true,
@@ -72,7 +75,7 @@ class _ReadingDetails extends StatelessWidget {
             datePublished,
             style: const TextStyle(fontSize: 11),
           ),
-          //leading: const Icon(Icons.chevron_right, size: 30),
+          // leading: const Icon(Icons.chevron_right, size: 30),
         ),
         ListTile(
           dense: true,
@@ -82,11 +85,11 @@ class _ReadingDetails extends StatelessWidget {
             "Location",
             style: TextStyle(fontSize: 12.5),
           ),
-          subtitle: const Text(
-            'Marikina City, Philippines',
+          subtitle: Text(
+            photoLocation,
             style: TextStyle(fontSize: 11),
           ),
-          //leading: Icon(Icons.chevron_right, size: 30),
+          // leading: Icon(Icons.chevron_right, size: 30),
         ),
       ],
     );
@@ -99,11 +102,13 @@ class ReadingListView extends StatelessWidget {
     required this.thumbnail,
     required this.meterNumber,
     required this.datePublished,
+    required this.photoLocation,
   }) : super(key: key);
 
   final Widget thumbnail;
   final String meterNumber;
   final String datePublished;
+  final String photoLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +120,7 @@ class ReadingListView extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color.fromRGBO(217, 225, 223, 0.8),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Color.fromRGBO(215, 230, 227, 1)),
+            border: Border.all(color: const Color.fromRGBO(215, 230, 227, 1)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -124,19 +129,16 @@ class ReadingListView extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // AspectRatio(
-                  //   aspectRatio: 1,
-                  //   child: thumbnail,
-                  // ),
                   Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: thumbnail,
                   ),
                   SizedBox(
-                    width: 150,
+                    width: 175,
                     child: _ReadingDetails(
                       meterNumber: meterNumber,
                       datePublished: datePublished,
+                      photoLocation: photoLocation,
                     ),
                   ),
                 ],

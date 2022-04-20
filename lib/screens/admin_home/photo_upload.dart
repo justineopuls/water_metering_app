@@ -24,6 +24,8 @@ class PhotoUpload extends StatefulWidget {
 class _PhotoUploadState extends State<PhotoUpload> {
   Uint8List? _file;
   bool _isLoading = false;
+  String photoLocation = '';
+  var photoDateTime = '';
   final TextEditingController _meterNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -31,8 +33,12 @@ class _PhotoUploadState extends State<PhotoUpload> {
     Uint8List file = await pickImage(
       ImageSource.camera,
     );
+    String location = await getExifLocation(file);
+    String dateTime = await getExifDateTime(file);
     setState(() {
       _file = file;
+      photoLocation = location;
+      photoDateTime = dateTime;
     });
   }
 
@@ -173,8 +179,8 @@ class _PhotoUploadState extends State<PhotoUpload> {
                       uploadAdminImage(
                         user!.uid,
                         user.displayName,
-                        'Test Location',
-                        'Test Date Time',
+                        photoLocation,
+                        photoDateTime,
                       );
                     }
                   }),
