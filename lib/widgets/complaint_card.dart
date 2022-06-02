@@ -31,8 +31,11 @@ class ComplaintCard extends StatelessWidget {
               ));
         },
         child: Container(
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            border: Border.all(),
+            color: const Color.fromRGBO(217, 225, 223, 0.8),
+            borderRadius: BorderRadius.circular(20),
+            border:  Border.all(color: const Color.fromRGBO(215, 230, 227, 1)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),

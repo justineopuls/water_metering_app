@@ -20,7 +20,6 @@ import 'package:water_metering_app/screens/admin_home/delete_account.dart';
 import 'package:water_metering_app/screens/admin_home/view_customer_details.dart';
 import 'package:water_metering_app/screens/admin_home/photo_upload.dart';
 import 'package:water_metering_app/screens/admin_home/validate_customer_account.dart';
-import 'package:water_metering_app/screens/admin_home/view_database_entry.dart';
 import 'package:water_metering_app/screens/admin_home/view_customer_records.dart';
 import 'package:water_metering_app/screens/authenticate/sign_in.dart';
 import 'package:water_metering_app/screens/customer_home/contact_us.dart';
@@ -47,8 +46,8 @@ void main() async {
       appId: '1:856960125509:web:3245a21d47e0bc8e96b12c',
       messagingSenderId: '856960125509',
       projectId: 'water-metering-app',
-      storageBucket: 'water-metering-app.appspot.com',
-    ));
+          storageBucket: 'water-metering-app.appspot.com',
+ ));
   } else {
     await Firebase.initializeApp();
   }
@@ -132,7 +131,6 @@ class MyApp extends StatelessWidget {
           Routes.validateCustomerAccount: (context) =>
               const ValidateCustomerAccount(),
           Routes.deleteUserAccount: (context) => const DeleteAccount(),
-
           // Meter Reader Routes
           Routes.meterReaderHome: (context) => const MeterReaderHome(),
           Routes.meterReaderUpload: (context) => const MeterReaderUpload(),

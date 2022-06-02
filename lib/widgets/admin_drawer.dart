@@ -42,6 +42,12 @@ class AdminDrawer extends StatelessWidget {
             onTap: () => Navigator.pushReplacementNamed(
                 context, Routes.complaintHandling),
           ),
+          _createDrawerItem(
+            icon: Icons.cloud_download,
+            text: 'Download Water Meter Images',
+            onTap: () => Navigator.pushReplacementNamed(
+                context, Routes.downloadImages),
+          ),
           const Divider(),
           _createDrawerItem(
             icon: Icons.person_add,
@@ -56,11 +62,18 @@ class AdminDrawer extends StatelessWidget {
                 context, Routes.addMeterReaderAccount),
           ),
           _createDrawerItem(
+            icon: Icons.delete,
+            text: 'Accounts for Deletion',
+            onTap: () => Navigator.pushReplacementNamed(
+                context, Routes.deleteUserAccount),
+          ),
+          _createDrawerItem(
             icon: Icons.check,
             text: 'Validate Users',
             onTap: () => Navigator.pushReplacementNamed(
                 context, Routes.validateCustomerAccount),
           ),
+
           // _createDrawerItem(
           //   icon: Icons.delete,
           //   text: 'Delete User Account',

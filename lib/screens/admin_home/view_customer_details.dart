@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:water_metering_app/utils/utils.dart';
 import 'package:water_metering_app/widgets/change_username.dart';
 import '../../routes/routes.dart';
 import '../../widgets/admin_drawer.dart';
@@ -80,8 +81,22 @@ class _ViewCustomerDetailsState extends State<ViewCustomerDetails> {
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                       subtitle: Text(snapshot.data!.data()['email']),
-                      trailing: Icon(Icons.chevron_right, size: 30),
                       onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Delete Account",
+                        style: TextStyle(fontWeight: FontWeight.w500, color: Colors.red),
+                      ),
+                      onTap: () {
+                        FirebaseFirestore.instance.collection('users')
+                            .doc(widget.uid)
+                            .set({
+                          'isForDeletion': true
+                        },SetOptions(merge: true)).then((value){
+                          showSnackBar('Account successfully tagged for deletion', context);
+                        });
+                      },
                     ),
                   ],
                 ));
