@@ -154,10 +154,10 @@ class FirestoreMethods {
   ) async {
     String result = 'Some error occured.';
     try {
+      String uploadId = const Uuid().v1();
       String photoUrl = await StorageMethods()
           .uploadImageToStorage('admin_uploads', file, true);
 
-      String uploadId = const Uuid().v1();
       AdminImage adminImage = AdminImage(
         meterNumber: meterNumber,
         uid: uid,
