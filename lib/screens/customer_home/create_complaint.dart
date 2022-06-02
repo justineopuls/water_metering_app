@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:water_metering_app/models/user.dart';
 import 'package:water_metering_app/providers/user_provider.dart';
@@ -17,7 +18,7 @@ class CreateComplaint extends StatefulWidget {
 }
 
 class _CreateComplaintState extends State<CreateComplaint> {
-  Uint8List? _file;
+  var _file;
   bool _isLoading = false;
   String photoLocation = '';
   var photoDateTime = '';
@@ -35,15 +36,15 @@ class _CreateComplaintState extends State<CreateComplaint> {
                 padding: const EdgeInsets.all(20.0),
                 child: const Text('Take a photo'),
                 onPressed: () async {
+                  await Permission.camera.request().isGranted;
                   Navigator.of(context).pop();
-                  Uint8List file = await pickImage(
-                    ImageSource.camera,
-                  );
-                  String location = await getExifLocation(file);
-                  String dateTime = await getExifDateTime(file);
+                  XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
+                  Uint8List? bytes = await file?.readAsBytes();
+                  //String location = await getExifLocation(bytes);
+                  String dateTime = await getExifDateTime(bytes);
                   setState(() {
-                    _file = file;
-                    photoLocation = location;
+                    _file = bytes;
+                    photoLocation = 'location';
                     photoDateTime = dateTime;
                   });
                 },

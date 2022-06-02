@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -32,17 +31,15 @@ class _PhotoUploadState extends State<PhotoUpload> {
   String ButtonLabel = 'Take Photo';
 
   _selectImage(BuildContext context) async {
-    // Uint8List file = await pickImage(
-    //  ImageSource.camera,
-    // );
+    await Permission.camera.request().isGranted;
     XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
-    // String location = await getExifLocation(file);
-    // String dateTime = await getExifDateTime(file);
     Uint8List? bytes = await file?.readAsBytes();
+    //String location = await getExifLocation(bytes);
+    String dateTime = await getExifDateTime(bytes);
     setState(() {
       _file = bytes;
       photoLocation = 'location';
-      photoDateTime = 'dateTime';
+      photoDateTime = dateTime;
       ButtonLabel = 'Upload Photo';
     });
   }
@@ -166,12 +163,6 @@ class _PhotoUploadState extends State<PhotoUpload> {
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: const Text('Ensure the meter dial is visible'),
-                            // content: Column(
-                            //   children: <Widget>[
-                            //       Text('Position the camera such that the image is '),
-                            //       Image.network('https://i.imgur.com/XM3WAEo.png'),
-                            //   ],
-                            // ),
                             content: Image.network('https://i.imgur.com/B3dDZWN.png'),
                             actions: <Widget>[
                               TextButton(
@@ -232,6 +223,40 @@ class _PhotoUploadState extends State<PhotoUpload> {
               //         );
               //       }
               //     }),
+
+              // TextButton(
+              //     onPressed: () async{
+              //         if (await Permission.camera.request().isGranted) {
+              //           showSnackBar('access granted',context);
+              //         }
+              //         setState(() {});
+              //       var status = await Permission.camera.status;
+              //       if (status.isGranted){
+              //         showDialog<String>(
+              //             context: context,
+              //             builder: (BuildContext context) => AlertDialog(
+              //               title: const Text('grant'),
+              //               content: Text('yes'),
+              //               actions: <Widget>[
+              //                 TextButton(
+              //                   onPressed: () => Navigator.pop(context, 'Cancel'),
+              //                   child: const Text('Cancel'),
+              //                 ),
+              //                 TextButton(
+              //                   onPressed: () {
+              //                     Navigator.pop(context, 'OK');
+              //                   },
+              //                   child: const Text('OK'),
+              //                 ),
+              //               ],
+              //         ),
+              //         );
+              //       } else{
+              //         print('no permision');
+              //       }
+              //     },
+              //     child: Text('test')
+              // ),
             ],
           ),
         ),
