@@ -11,6 +11,7 @@ import 'package:water_metering_app/utils/colors.dart';
 import 'package:water_metering_app/utils/constants.dart';
 import 'package:water_metering_app/utils/utils.dart';
 import 'package:water_metering_app/widgets/admin_drawer.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PhotoUpload extends StatefulWidget {
   const PhotoUpload({Key? key}) : super(key: key);
@@ -129,7 +130,6 @@ class _PhotoUploadState extends State<PhotoUpload> {
               ),
               const SizedBox(height: 20.0),
 
-
               // Upload Image
               Text('Selected Image'),
               const SizedBox(height: 5),
@@ -158,21 +158,24 @@ class _PhotoUploadState extends State<PhotoUpload> {
                     label: Text(ButtonLabel),
                     icon: const Icon(Icons.camera_alt),
                     onPressed: () {
-                      if (_file == null){
+                      if (_file == null) {
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Ensure the meter dial is visible'),
+                            title:
+                                const Text('Ensure the meter dial is visible'),
                             // content: Column(
                             //   children: <Widget>[
                             //       Text('Position the camera such that the image is '),
                             //       Image.network('https://i.imgur.com/XM3WAEo.png'),
                             //   ],
                             // ),
-                            content: Image.network('https://i.imgur.com/B3dDZWN.png'),
+                            content: Image.network(
+                                'https://i.imgur.com/B3dDZWN.png'),
                             actions: <Widget>[
                               TextButton(
-                                onPressed: () => Navigator.pop(context, 'Cancel'),
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
                                 child: const Text('Cancel'),
                               ),
                               TextButton(
@@ -185,15 +188,15 @@ class _PhotoUploadState extends State<PhotoUpload> {
                             ],
                           ),
                         );
-                       } else {
-                          if (_formKey.currentState!.validate()) {
-                            uploadAdminImage(
-                              user!.uid,
-                              user.displayName,
-                              photoLocation,
-                              photoDateTime,
-                            );
-                          }
+                      } else {
+                        if (_formKey.currentState!.validate()) {
+                          uploadAdminImage(
+                            user!.uid,
+                            user.displayName,
+                            photoLocation,
+                            photoDateTime,
+                          );
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -204,6 +207,20 @@ class _PhotoUploadState extends State<PhotoUpload> {
                       ),
                     ),
                   ),
+                  TextButton(
+                      onPressed: () async {
+                        if (await Permission.camera.request().isGranted) {
+                          showSnackBar('access granted', context);
+                        }
+                        setState(() {});
+                        var status = await Permission.camera.status;
+                        if (status.isGranted) {
+                          print('granted');
+                        } else {
+                          print('no permision');
+                        }
+                      },
+                      child: Text('test'))
                 ],
               ),
               //const SizedBox(height: 20.0),
