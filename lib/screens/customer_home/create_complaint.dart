@@ -26,6 +26,7 @@ class _CreateComplaintState extends State<CreateComplaint> {
   final _formKey = GlobalKey<FormState>();
 
   _selectImage(BuildContext context) async {
+    await Permission.location.request().isGranted;
     return showDialog(
         context: context,
         builder: (context) {
