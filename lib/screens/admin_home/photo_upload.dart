@@ -27,6 +27,9 @@ class _PhotoUploadState extends State<PhotoUpload> {
   String photoLocation = '';
   var photoDateTime = '';
   final TextEditingController _meterNumberController = TextEditingController();
+  final TextEditingController _numDigitsController = TextEditingController();
+  final TextEditingController _numBlackDigitsController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String ButtonLabel = 'Take Photo';
 
@@ -62,6 +65,8 @@ class _PhotoUploadState extends State<PhotoUpload> {
           uploadedBy,
           photoLocation,
           photoDateTime,
+          _numDigitsController.text,
+          _numBlackDigitsController.text,
         );
 
         if (result == 'success') {
@@ -129,9 +134,38 @@ class _PhotoUploadState extends State<PhotoUpload> {
               ),
               const SizedBox(height: 20.0),
 
+              const Text('Number of Total Digits'),
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _numDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of digits in the meter.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
+
+              const Text('Number of Black Digits'),
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _numBlackDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of black digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of black digits in the meter.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
 
               // Upload Image
-              Text('Selected Image'),
+              const Text('Selected Image'),
               const SizedBox(height: 5),
               Container(
                 alignment: Alignment.center,
@@ -158,15 +192,18 @@ class _PhotoUploadState extends State<PhotoUpload> {
                     label: Text(ButtonLabel),
                     icon: const Icon(Icons.camera_alt),
                     onPressed: () {
-                      if (_file == null){
+                      if (_file == null) {
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Ensure the meter dial is visible'),
-                            content: Image.network('https://i.imgur.com/B3dDZWN.png'),
+                            title:
+                                const Text('Ensure the meter dial is visible'),
+                            content: Image.network(
+                                'https://i.imgur.com/B3dDZWN.png'),
                             actions: <Widget>[
                               TextButton(
-                                onPressed: () => Navigator.pop(context, 'Cancel'),
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
                                 child: const Text('Cancel'),
                               ),
                               TextButton(
@@ -179,15 +216,15 @@ class _PhotoUploadState extends State<PhotoUpload> {
                             ],
                           ),
                         );
-                       } else {
-                          if (_formKey.currentState!.validate()) {
-                            uploadAdminImage(
-                              user!.uid,
-                              user.displayName,
-                              photoLocation,
-                              photoDateTime,
-                            );
-                          }
+                      } else {
+                        if (_formKey.currentState!.validate()) {
+                          uploadAdminImage(
+                            user!.uid,
+                            user.displayName,
+                            photoLocation,
+                            photoDateTime,
+                          );
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(

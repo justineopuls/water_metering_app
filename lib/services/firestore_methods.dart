@@ -24,10 +24,10 @@ class FirestoreMethods {
     try {
       if (file != null) {
         print('File Selected');
-        String photoUrl = await StorageMethods()
-            .uploadImageToStorage('complaints', file, true);
-
         String complaintId = const Uuid().v1();
+        String photoUrl = await StorageMethods().uploadImageToStorage(
+            'complaints', file, true, complaintId, meterNumber, '', '');
+
         Complaint complaint = Complaint(
           description: description,
           uid: uid,
@@ -151,12 +151,20 @@ class FirestoreMethods {
     String uploadedBy,
     String photoLocation,
     String photoDateTime,
+    String numDigits,
+    String numBlackDigits,
   ) async {
     String result = 'Some error occured.';
     try {
       String uploadId = const Uuid().v1();
-      String photoUrl = await StorageMethods()
-          .uploadImageToStorage('admin_uploads', file, true);
+      String photoUrl = await StorageMethods().uploadImageToStorage(
+          'admin_uploads',
+          file,
+          false,
+          uploadId,
+          meterNumber,
+          numBlackDigits,
+          numDigits);
 
       AdminImage adminImage = AdminImage(
         meterNumber: meterNumber,
@@ -167,6 +175,8 @@ class FirestoreMethods {
         photoUrl: photoUrl,
         photoLocation: photoLocation,
         photoDateTime: photoDateTime,
+        numDigits: numDigits,
+        numBlackDigits: numBlackDigits,
       );
 
       _firestore

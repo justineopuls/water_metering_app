@@ -9,18 +9,37 @@ class StorageMethods {
 
   // Add image to firebase storage
   Future<String> uploadImageToStorage(
-      String childName, Uint8List file, bool isComplaint) async {
+    String childName,
+    Uint8List file,
+    bool isComplaint,
+    String imageID,
+    String meterNumber,
+    String numBlackDigits,
+    String numDigits,
+  ) async {
     Reference ref =
         _storage.ref().child(childName).child(_auth.currentUser!.uid);
 
-    if (isComplaint) {
-      String complaintId = const Uuid().v1();
-      ref = ref.child(complaintId);
-    }
+    String path = '';
+    path = imageID +
+        "_" +
+        meterNumber +
+        "_" +
+        numBlackDigits +
+        "_" +
+        numDigits +
+        ".jpg";
+    ref = ref.child(path);
     UploadTask uploadTask = ref.putData(file);
 
     TaskSnapshot snapshot = await uploadTask;
     String downloadUrl = await snapshot.ref.getDownloadURL();
+
+    // 2nd image upload for processing
+    if (isComplaint == false) {
+      UploadTask uploadTask2 =
+          _storage.ref().child('for_processing').child(path).putData(file);
+    }
     return downloadUrl;
   }
 

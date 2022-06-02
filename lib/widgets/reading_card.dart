@@ -36,6 +36,7 @@ class ReadingCard extends StatelessWidget {
             snapshot['datePublished'].toDate(),
           ),
           photoLocation: snapshot['photoLocation'],
+          meterReading: snapshot['meterReading'],
         ),
       ),
     );
@@ -49,12 +50,14 @@ class _ReadingDetails extends StatelessWidget {
     required this.meterNumber,
     required this.datePublished,
     required this.photoLocation,
+    required this.meterReading,
   }) : super(key: key);
 
   //final String displayName;
   final String meterNumber;
   final String datePublished;
   final String photoLocation;
+  final String meterReading;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +106,20 @@ class _ReadingDetails extends StatelessWidget {
           ),
           // leading: Icon(Icons.chevron_right, size: 30),
         ),
+        ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+          visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+          title: const Text(
+            "Meter Reading",
+            style: TextStyle(fontSize: 12.5),
+          ),
+          subtitle: Text(
+            meterReading,
+            style: TextStyle(fontSize: 11),
+          ),
+          // leading: Icon(Icons.chevron_right, size: 30),
+        ),
       ],
     );
   }
@@ -115,12 +132,14 @@ class ReadingListView extends StatelessWidget {
     required this.meterNumber,
     required this.datePublished,
     required this.photoLocation,
+    required this.meterReading,
   }) : super(key: key);
 
   final Widget thumbnail;
   final String meterNumber;
   final String datePublished;
   final String photoLocation;
+  final String meterReading;
 
   @override
   Widget build(BuildContext context) {
@@ -149,6 +168,7 @@ class ReadingListView extends StatelessWidget {
                     meterNumber: meterNumber,
                     datePublished: datePublished,
                     photoLocation: photoLocation,
+                    meterReading: meterReading,
                   ),
                 ),
               ],

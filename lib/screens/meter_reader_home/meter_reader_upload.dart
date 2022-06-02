@@ -28,6 +28,9 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
   String photoLocation = '';
   var photoDateTime = '';
   final TextEditingController _meterNumberController = TextEditingController();
+  final TextEditingController _numDigitsController = TextEditingController();
+  final TextEditingController _numBlackDigitsController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String ButtonLabel = 'Take Photo';
 
@@ -49,11 +52,11 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
   }
 
   void uploadAdminImage(
-      String uid,
-      String uploadedBy,
-      String photoLocation,
-      String photoDateTime,
-      ) async {
+    String uid,
+    String uploadedBy,
+    String photoLocation,
+    String photoDateTime,
+  ) async {
     setState(() {
       _isLoading = true;
     });
@@ -66,6 +69,8 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
           uploadedBy,
           photoLocation,
           photoDateTime,
+          _numDigitsController.text,
+          _numBlackDigitsController.text,
         );
 
         if (result == 'success') {
@@ -133,6 +138,35 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
               ),
               const SizedBox(height: 20.0),
 
+              const Text('Number of Total Digits'),
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _numDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of digits in the meter.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
+
+              const Text('Number of Black Digits'),
+              const SizedBox(height: 5),
+              TextFormField(
+                controller: _numBlackDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of black digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of black digits in the meter.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
 
               // Upload Image
               Text('Selected Image'),
@@ -145,12 +179,12 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
                 child: Center(
                   child: _file != null
                       ? Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: MemoryImage(_file!),
-                      ),
-                    ),
-                  )
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: MemoryImage(_file!),
+                            ),
+                          ),
+                        )
                       : const Text('Please select an image'),
                 ),
               ),
@@ -162,15 +196,18 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
                     label: Text(ButtonLabel),
                     icon: const Icon(Icons.camera_alt),
                     onPressed: () {
-                      if (_file == null){
+                      if (_file == null) {
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Ensure the meter dial is visible'),
-                            content: Image.network('https://i.imgur.com/B3dDZWN.png'),
+                            title:
+                                const Text('Ensure the meter dial is visible'),
+                            content: Image.network(
+                                'https://i.imgur.com/B3dDZWN.png'),
                             actions: <Widget>[
                               TextButton(
-                                onPressed: () => Navigator.pop(context, 'Cancel'),
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
                                 child: const Text('Cancel'),
                               ),
                               TextButton(

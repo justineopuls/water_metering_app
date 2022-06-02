@@ -9,6 +9,11 @@ class AdminImage {
   final String photoUrl;
   final String photoLocation;
   final String photoDateTime;
+  final String numDigits;
+  final String numBlackDigits;
+  final String processedImageFilename;
+  final String processedImageURL;
+  final String meterReading;
 
   const AdminImage({
     required this.meterNumber,
@@ -19,6 +24,11 @@ class AdminImage {
     this.photoUrl = '',
     this.photoLocation = '',
     this.photoDateTime = '',
+    this.numDigits = '',
+    this.numBlackDigits = '',
+    this.meterReading = '',
+    this.processedImageFilename = '',
+    this.processedImageURL = '',
   });
 
   Map<String, dynamic> toJson() => {
@@ -26,24 +36,33 @@ class AdminImage {
         'uid': uid,
         'uploadedBy': uploadedBy,
         'datePublished': datePublished,
-        'complaintId': uploadId,
+        'uploadId': uploadId,
         'photoUrl': photoUrl,
         'photoLocation': photoLocation,
         'photoDateTime': photoDateTime,
+        'numDigits': numDigits,
+        'numBlackDigits': numBlackDigits,
+        'meterReading': meterReading,
+        'processedImageFilename': processedImageFilename,
+        'processedImageURL': processedImageURL,
       };
 
   static AdminImage fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
     return AdminImage(
-      meterNumber: snapshot['meterNumber'],
-      uid: snapshot['uid'],
-      uploadedBy: snapshot['uploadedBy'],
-      datePublished: snapshot['datePublished'],
-      uploadId: snapshot['uploadId'],
-      photoUrl: snapshot['photoUrl'],
-      photoLocation: snapshot['photoLocation'],
-      photoDateTime: snapshot['photoDateTime'],
-    );
+        meterNumber: snapshot['meterNumber'],
+        uid: snapshot['uid'],
+        uploadedBy: snapshot['uploadedBy'],
+        datePublished: snapshot['datePublished'],
+        uploadId: snapshot['uploadId'],
+        photoUrl: snapshot['photoUrl'],
+        photoLocation: snapshot['photoLocation'],
+        photoDateTime: snapshot['photoDateTime'],
+        numDigits: snapshot['numDigits'],
+        numBlackDigits: snapshot['numBlackDigits'],
+        processedImageFilename: snapshot['processedImageFilename'],
+        meterReading: snapshot['meterReading'],
+        processedImageURL: snapshot['processedImageURL']);
   }
 }
