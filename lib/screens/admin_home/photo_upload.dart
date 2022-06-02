@@ -40,7 +40,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
       _file = file;
       photoLocation = location;
       photoDateTime = dateTime;
-      ButtonLabel = 'Upload Photo';
+      // ButtonLabel = 'Upload Photo';
     });
   }
 
@@ -129,7 +129,6 @@ class _PhotoUploadState extends State<PhotoUpload> {
               ),
               const SizedBox(height: 20.0),
 
-
               // Upload Image
               Text('Selected Image'),
               const SizedBox(height: 5),
@@ -157,45 +156,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
                   ElevatedButton.icon(
                     label: Text(ButtonLabel),
                     icon: const Icon(Icons.camera_alt),
-                    onPressed: () {
-                      if (_file == null){
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Ensure the meter dial is visible'),
-                            // content: Column(
-                            //   children: <Widget>[
-                            //       Text('Position the camera such that the image is '),
-                            //       Image.network('https://i.imgur.com/XM3WAEo.png'),
-                            //   ],
-                            // ),
-                            content: Image.network('https://i.imgur.com/B3dDZWN.png'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'Cancel'),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context, 'OK');
-                                  _selectImage(context);
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
-                       } else {
-                          if (_formKey.currentState!.validate()) {
-                            uploadAdminImage(
-                              user!.uid,
-                              user.displayName,
-                              photoLocation,
-                              photoDateTime,
-                            );
-                          }
-                      }
-                    },
+                    onPressed: () => _selectImage(context),
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,
                       onPrimary: secondaryColor,
@@ -204,6 +165,26 @@ class _PhotoUploadState extends State<PhotoUpload> {
                       ),
                     ),
                   ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal, // background
+                        onPrimary: Colors.white, // foreground
+                      ),
+                      child: _isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : const Text('Upload Image'),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          uploadAdminImage(
+                            user!.uid,
+                            user.displayName,
+                            photoLocation,
+                            photoDateTime,
+                          );
+                        }
+                      }),
                 ],
               ),
               //const SizedBox(height: 20.0),

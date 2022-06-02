@@ -42,12 +42,6 @@ class AdminDrawer extends StatelessWidget {
             onTap: () => Navigator.pushReplacementNamed(
                 context, Routes.complaintHandling),
           ),
-          _createDrawerItem(
-            icon: Icons.cloud_download,
-            text: 'Download Water Meter Images',
-            onTap: () => Navigator.pushReplacementNamed(
-                context, Routes.downloadImages),
-          ),
           const Divider(),
           _createDrawerItem(
             icon: Icons.person_add,

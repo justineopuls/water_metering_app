@@ -18,7 +18,6 @@ import 'package:water_metering_app/screens/customer_home/edit_profile.dart';
 import 'package:water_metering_app/screens/meter_reader_home/meter_reader_home.dart';
 import 'package:water_metering_app/screens/meter_reader_home/meter_reader_upload.dart';
 import 'package:water_metering_app/widgets/change_username.dart';
-import '../screens/admin_home/download_images.dart';
 import '../screens/admin_home/view_customer_billing.dart';
 import '../screens/admin_home/view_customer_details.dart';
 import '../widgets/change_email.dart';
