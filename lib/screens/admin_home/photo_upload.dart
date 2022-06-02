@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +11,7 @@ import 'package:water_metering_app/utils/colors.dart';
 import 'package:water_metering_app/utils/constants.dart';
 import 'package:water_metering_app/utils/utils.dart';
 import 'package:water_metering_app/widgets/admin_drawer.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PhotoUpload extends StatefulWidget {
   const PhotoUpload({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class PhotoUpload extends StatefulWidget {
 }
 
 class _PhotoUploadState extends State<PhotoUpload> {
-  Uint8List? _file;
+  var _file;
   bool _isLoading = false;
   String photoLocation = '';
   var photoDateTime = '';
@@ -31,15 +32,17 @@ class _PhotoUploadState extends State<PhotoUpload> {
   String ButtonLabel = 'Take Photo';
 
   _selectImage(BuildContext context) async {
-    Uint8List file = await pickImage(
-      ImageSource.camera,
-    );
-    String location = await getExifLocation(file);
-    String dateTime = await getExifDateTime(file);
+    // Uint8List file = await pickImage(
+    //  ImageSource.camera,
+    // );
+    XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
+    // String location = await getExifLocation(file);
+    // String dateTime = await getExifDateTime(file);
+    Uint8List? bytes = await file?.readAsBytes();
     setState(() {
-      _file = file;
-      photoLocation = location;
-      photoDateTime = dateTime;
+      _file = bytes;
+      photoLocation = 'location';
+      photoDateTime = 'dateTime';
       ButtonLabel = 'Upload Photo';
     });
   }
@@ -57,7 +60,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
       try {
         String result = await FirestoreMethods().uploadAdminImage(
           _meterNumberController.text,
-          _file!,
+          _file,
           uid,
           uploadedBy,
           photoLocation,

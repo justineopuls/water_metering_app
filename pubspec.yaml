@@ -51,6 +51,7 @@ dependencies:
   html: ^0.15.0
   exif: ^3.1.1
   geocoding: ^2.0.4
+  permission_handler: ^9.2.0
 
 dependency_overrides:
   photo_view:
