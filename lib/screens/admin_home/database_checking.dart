@@ -27,10 +27,12 @@ class _DatabaseCheckingState extends State<DatabaseChecking> {
           return const Loading();
         } else {
           return ListView.builder(
-              shrinkWrap: true,
-              itemCount: snapshot.data?.docs.length,
-              itemBuilder: (context, index) =>
-                  MeterNumberCard(snapshot: snapshot.data!.docs[index].data()));
+            shrinkWrap: true,
+            itemCount: snapshot.data?.docs.length,
+            itemBuilder: (context, index) => MeterNumberCard(
+              snapshot: snapshot.data!.docs[index].data(),
+            ),
+          );
         }
       });
 
@@ -45,7 +47,7 @@ class _DatabaseCheckingState extends State<DatabaseChecking> {
             onPressed: () {
               setState(() {
                 customSearchBar = TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'search for meter number...',
                     //
                     hintStyle: TextStyle(
@@ -54,7 +56,7 @@ class _DatabaseCheckingState extends State<DatabaseChecking> {
                       fontStyle: FontStyle.italic,
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   onSubmitted: (value) {
                     searchValue = value;
                     customBody = StreamBuilder(

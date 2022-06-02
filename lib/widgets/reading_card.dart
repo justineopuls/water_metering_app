@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:water_metering_app/screens/admin_home/records_view_page.dart';
 import 'package:water_metering_app/utils/colors.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 
@@ -12,19 +13,30 @@ class ReadingCard extends StatelessWidget {
     return Container(
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: ReadingListView(
-        thumbnail: snapshot['photoUrl'] == ''
-            ? Container(
-                decoration: const BoxDecoration(color: Colors.pink),
-              )
-            : SizedBox(
-                child: Image.network(snapshot['photoUrl']),
-              ),
-        meterNumber: snapshot['meterNumber'],
-        datePublished: DateFormat.yMMMd().format(
-          snapshot['datePublished'].toDate(),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RecordsViewPage(
+                  snapshot: snapshot,
+                ),
+              ));
+        },
+        child: ReadingListView(
+          thumbnail: snapshot['photoUrl'] == ''
+              ? Container(
+                  decoration: const BoxDecoration(color: Colors.pink),
+                )
+              : SizedBox(
+                  child: Image.network(snapshot['photoUrl']),
+                ),
+          meterNumber: snapshot['meterNumber'],
+          datePublished: DateFormat.yMMMd().format(
+            snapshot['datePublished'].toDate(),
+          ),
+          photoLocation: snapshot['photoLocation'],
         ),
-        photoLocation: snapshot['photoLocation'],
       ),
     );
   }
@@ -112,37 +124,34 @@ class ReadingListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(217, 225, 223, 0.8),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color.fromRGBO(215, 230, 227, 1)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: SizedBox(
-              height: 200,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: thumbnail,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color.fromRGBO(217, 225, 223, 0.8),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: const Color.fromRGBO(215, 230, 227, 1)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: SizedBox(
+            height: 200,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: thumbnail,
+                ),
+                SizedBox(
+                  width: 175,
+                  child: _ReadingDetails(
+                    meterNumber: meterNumber,
+                    datePublished: datePublished,
+                    photoLocation: photoLocation,
                   ),
-                  SizedBox(
-                    width: 175,
-                    child: _ReadingDetails(
-                      meterNumber: meterNumber,
-                      datePublished: datePublished,
-                      photoLocation: photoLocation,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
