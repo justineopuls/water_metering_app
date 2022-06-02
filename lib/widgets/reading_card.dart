@@ -47,7 +47,6 @@ class _ReadingDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(0.0),
       children: [
         ListTile(
           dense: true,

@@ -24,15 +24,24 @@ class MeterReaderUpload extends StatefulWidget {
 class _MeterReaderUploadState extends State<MeterReaderUpload> {
   Uint8List? _file;
   bool _isLoading = false;
+  String photoLocation = '';
+  var photoDateTime = '';
   final TextEditingController _meterNumberController = TextEditingController();
+  final TextEditingController _numDigitsController = TextEditingController();
+  final TextEditingController _numBlackDigitsController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   _selectImage(BuildContext context) async {
     Uint8List file = await pickImage(
       ImageSource.camera,
     );
+    String location = await getExifLocation(file);
+    String dateTime = await getExifDateTime(file);
     setState(() {
       _file = file;
+      photoLocation = location;
+      photoDateTime = dateTime;
     });
   }
 
@@ -54,6 +63,8 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
           uploadedBy,
           photoLocation,
           photoDateTime,
+          _numDigitsController.text,
+          _numBlackDigitsController.text,
         );
 
         if (result == 'success') {
@@ -104,7 +115,7 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              // Complaint Details Form Field
+              // Upload Details Form Field
               const Text('Meter Number'),
               TextFormField(
                 controller: _meterNumberController,
@@ -113,6 +124,32 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
                 validator: (val) {
                   if (val == null || val.isEmpty) {
                     return 'Please enter the meter number.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
+
+              TextFormField(
+                controller: _numDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of digits in the meter.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
+
+              TextFormField(
+                controller: _numBlackDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of black digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of black digits in the meter.';
                   }
                   return null;
                 },
@@ -173,8 +210,8 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
                       uploadAdminImage(
                         user!.uid,
                         user.displayName,
-                        'Test Location',
-                        'Test Date Time',
+                        photoLocation,
+                        photoDateTime,
                       );
                     }
                   }),

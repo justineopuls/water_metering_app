@@ -35,7 +35,7 @@ class ComplaintCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color.fromRGBO(217, 225, 223, 0.8),
             borderRadius: BorderRadius.circular(20),
-            border:  Border.all(color: const Color.fromRGBO(215, 230, 227, 1)),
+            border: Border.all(color: const Color.fromRGBO(215, 230, 227, 1)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),

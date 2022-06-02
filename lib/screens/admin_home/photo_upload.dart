@@ -27,6 +27,9 @@ class _PhotoUploadState extends State<PhotoUpload> {
   String photoLocation = '';
   var photoDateTime = '';
   final TextEditingController _meterNumberController = TextEditingController();
+  final TextEditingController _numDigitsController = TextEditingController();
+  final TextEditingController _numBlackDigitsController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String ButtonLabel = 'Take Photo';
 
@@ -62,6 +65,8 @@ class _PhotoUploadState extends State<PhotoUpload> {
           uploadedBy,
           photoLocation,
           photoDateTime,
+          _numDigitsController.text,
+          _numBlackDigitsController.text,
         );
 
         if (result == 'success') {
@@ -113,7 +118,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              // Complaint Details Form Field
+              // Upload Details Form Field
               const Text('Meter Number'),
               const SizedBox(height: 5),
               TextFormField(
@@ -123,6 +128,32 @@ class _PhotoUploadState extends State<PhotoUpload> {
                 validator: (val) {
                   if (val == null || val.isEmpty) {
                     return 'Please enter the meter number.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
+
+              TextFormField(
+                controller: _numDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of digits in the meter.';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20.0),
+
+              TextFormField(
+                controller: _numBlackDigitsController,
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter number of black digits present'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please enter the number of black digits in the meter.';
                   }
                   return null;
                 },

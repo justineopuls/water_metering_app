@@ -151,6 +151,8 @@ class FirestoreMethods {
     String uploadedBy,
     String photoLocation,
     String photoDateTime,
+    String numDigits,
+    String numBlackDigits,
   ) async {
     String result = 'Some error occured.';
     try {
@@ -167,6 +169,8 @@ class FirestoreMethods {
         photoUrl: photoUrl,
         photoLocation: photoLocation,
         photoDateTime: photoDateTime,
+        numDigits: numDigits,
+        numBlackDigits: numBlackDigits,
       );
 
       _firestore

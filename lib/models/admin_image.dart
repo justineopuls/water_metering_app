@@ -9,6 +9,8 @@ class AdminImage {
   final String photoUrl;
   final String photoLocation;
   final String photoDateTime;
+  final String numDigits;
+  final String numBlackDigits;
 
   const AdminImage({
     required this.meterNumber,
@@ -19,6 +21,8 @@ class AdminImage {
     this.photoUrl = '',
     this.photoLocation = '',
     this.photoDateTime = '',
+    required this.numDigits,
+    required this.numBlackDigits,
   });
 
   Map<String, dynamic> toJson() => {
@@ -26,10 +30,12 @@ class AdminImage {
         'uid': uid,
         'uploadedBy': uploadedBy,
         'datePublished': datePublished,
-        'complaintId': uploadId,
+        'uploadId': uploadId,
         'photoUrl': photoUrl,
         'photoLocation': photoLocation,
         'photoDateTime': photoDateTime,
+        'numDigits': numDigits,
+        'numBlackDigits': numBlackDigits,
       };
 
   static AdminImage fromSnapshot(DocumentSnapshot snap) {
@@ -44,6 +50,8 @@ class AdminImage {
       photoUrl: snapshot['photoUrl'],
       photoLocation: snapshot['photoLocation'],
       photoDateTime: snapshot['photoDateTime'],
+      numDigits: snapshot['numDigits'],
+      numBlackDigits: snapshot['numBlackDigits'],
     );
   }
 }
