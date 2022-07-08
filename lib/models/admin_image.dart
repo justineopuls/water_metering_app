@@ -11,6 +11,8 @@ class AdminImage {
   final String photoDateTime;
   final String numDigits;
   final String numBlackDigits;
+  final dateProcessed;
+  final bool isProcessed;
 
   const AdminImage({
     required this.meterNumber,
@@ -23,6 +25,8 @@ class AdminImage {
     this.photoDateTime = '',
     required this.numDigits,
     required this.numBlackDigits,
+    this.dateProcessed = '',
+    this.isProcessed = false,
   });
 
   Map<String, dynamic> toJson() => {
@@ -36,6 +40,8 @@ class AdminImage {
         'photoDateTime': photoDateTime,
         'numDigits': numDigits,
         'numBlackDigits': numBlackDigits,
+        'dateProcessed': dateProcessed,
+        'isProcessed': isProcessed,
       };
 
   static AdminImage fromSnapshot(DocumentSnapshot snap) {
@@ -52,6 +58,8 @@ class AdminImage {
       photoDateTime: snapshot['photoDateTime'],
       numDigits: snapshot['numDigits'],
       numBlackDigits: snapshot['numBlackDigits'],
+      dateProcessed: snapshot['dateProcessed'],
+      isProcessed: snapshot['isProcessed'],
     );
   }
 }
