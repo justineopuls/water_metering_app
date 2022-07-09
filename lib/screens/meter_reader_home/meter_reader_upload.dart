@@ -45,7 +45,7 @@ class _MeterReaderUploadState extends State<MeterReaderUpload> {
     String dateTime = await getExifDateTime(bytes);
     setState(() {
       _file = bytes;
-      photoLocation = 'location';
+      photoLocation = 'Bulacan, Philippines';
       photoDateTime = dateTime;
       ButtonLabel = 'Upload Photo';
     });

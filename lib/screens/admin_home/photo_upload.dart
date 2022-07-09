@@ -41,7 +41,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
     String dateTime = await getExifDateTime(bytes);
     setState(() {
       _file = bytes;
-      photoLocation = 'location';
+      photoLocation = 'Bulacan, Philippines';
       photoDateTime = dateTime;
       ButtonLabel = 'Upload Photo';
     });
